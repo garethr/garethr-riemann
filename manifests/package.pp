@@ -1,4 +1,4 @@
-class riemann::package($version='0.1.2') {
+class riemann::package($version) {
   include wget
 
   package { [

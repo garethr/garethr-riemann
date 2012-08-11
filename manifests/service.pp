@@ -1,4 +1,4 @@
-class riemann::service {
+class riemann::service($config_file) {
   file { '/etc/init.d/riemann':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -6,7 +6,7 @@ class riemann::service {
 
   file { '/etc/init/riemann.conf':
     ensure  => present,
-    source  => 'puppet:///modules/riemann/riemann.conf',
+    content => template('riemann/init/riemann.conf.erb')
   }
 
   service {'riemann':
@@ -22,6 +22,5 @@ class riemann::service {
     ],
   }
 
-  File['/etc/riemann.config'] ~> Service['riemann']
   File['/etc/init/riemann.conf'] ~> Service['riemann']
 }
