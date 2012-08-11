@@ -1,5 +1,4 @@
-class riemann::dash {
+class riemann::dash(config_file='') {
   include riemann::dash::package
-  include riemann::dash::config
-  include riemann::dash::service
+  class {'riemann::dash::service': dash_config_file => $config_file }
 }

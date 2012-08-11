@@ -1,4 +1,4 @@
-class riemann::dash::config {
+class riemann::dash::sample {
   file { '/etc/riemann-dash.rb':
     ensure  => present,
     source  => 'puppet:///modules/riemann/riemann-dash.rb',

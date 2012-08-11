@@ -1,4 +1,4 @@
-class riemann::dash::service {
+class riemann::dash::service($dash_config_file='') {
   file { '/etc/init.d/riemann-dash':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -6,7 +6,7 @@ class riemann::dash::service {
 
   file { '/etc/init/riemann-dash.conf':
     ensure  => present,
-    source  => 'puppet:///modules/riemann/riemann-dash.conf',
+    content => template('riemann/riemann-dash.conf.erb'),
     notify  => Service['riemann-dash'],
   }
 
