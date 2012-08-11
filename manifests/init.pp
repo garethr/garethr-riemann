@@ -1,6 +1,6 @@
 class riemann(
   $version='0.1.2',
-  $config_file='/etc/riemann.sample.conf'
+  $config_file='/etc/riemann.sample.config'
   ){
     class { 'riemann::package': version    => $version }
     include riemann::config
