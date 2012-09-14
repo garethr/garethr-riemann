@@ -1,10 +1,7 @@
 class riemann::package($version) {
   include wget
 
-  package { [
-      'leiningen',
-      'clojure1.3',
-    ]:
+  package { $riemann::params::packages:
       ensure => installed,
   }
 
