@@ -1,15 +1,17 @@
 class riemann::dash::package {
-  package { [
-      'build-essential',
-    ]:
-      ensure => installed,
+
+  # requires puppetlabs::stdlib
+  define ensure_packages {
+    ensure_resource('package', $name, {'ensure' => 'present'})
   }
+
+  ensure_packages {$riemann::dash::params::packages:}
 
   package { [
       'riemann-dash'
     ]:
       ensure   => installed,
-      require  => Package['build-essential'],
+      require  => Package[$riemann::dash::params::packages],
       provider => gem,
   }
 }

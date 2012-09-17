@@ -13,9 +13,9 @@ class riemann::package($version) {
 
   exec { 'untar_riemann':
     command => "tar xvfj /usr/local/src/riemann-$version.tar.bz2",
-    cwd     => '/opt',
     creates => "/opt/riemann-$version",
-    path    => ['/bin',],
+    cwd     => '/opt',
+    path    => ['/bin', '/usr/bin',],
     before  => File['/opt/riemann'],
   }
 
