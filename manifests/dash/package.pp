@@ -1,15 +1,13 @@
-class riemann::dash::package {
-  package { [
-      'build-essential',
-    ]:
-      ensure => installed,
-  }
+class riemann::dash::package
+  inherits riemann::dash::params {
+
+  ensure_packages($packages)
 
   package { [
       'riemann-dash'
     ]:
       ensure   => installed,
-      require  => Package['build-essential'],
+      require  => Package[$packages],
       provider => gem,
   }
 }

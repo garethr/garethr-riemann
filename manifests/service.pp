@@ -1,12 +1,40 @@
-class riemann::service($config_file) {
-  file { '/etc/init.d/riemann':
-    ensure => link,
-    target => '/lib/init/upstart-job',
+class riemann::service($config_file) inherits riemann::params {
+
+  case $::osfamily {
+    'Debian': {
+
+      $service_dependencies += [ File['/etc/init/riemann.conf'] ]
+
+      file { '/etc/init.d/riemann':
+        ensure => link,
+        target => '/lib/init/upstart-job',
+      }
+
+      file { '/etc/init/riemann.conf':
+        ensure  => present,
+        content => template('riemann/init/riemann.debian.erb')
+      }
+
+      File['/etc/init/riemann.conf'] ~> Service['riemann']
+    }
+
+    'RedHat': {
+
+      file { '/etc/init.d/riemann':
+        ensure  => present,
+        mode    => '0755',
+        content => template('riemann/init/riemann.redhat.erb'),
+      }
+    }
+
+    default: {
+      err("$::operatingsystem not supported")
+    }
   }
 
-  file { '/etc/init/riemann.conf':
-    ensure  => present,
-    content => template('riemann/init/riemann.conf.erb')
+  file {'/var/log/riemann':
+    ensure => 'directory',
+    mode   => '0755',
   }
 
   service {'riemann':
@@ -14,13 +42,8 @@ class riemann::service($config_file) {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    provider   => upstart,
-    require    => [
-      File['/etc/init.d/riemann'],
-      File['/etc/init/riemann.conf'],
-      Class['riemann::package'],
-    ],
+    provider   => $service_provider,
+    require    => $service_dependencies,
   }
 
-  File['/etc/init/riemann.conf'] ~> Service['riemann']
 }
