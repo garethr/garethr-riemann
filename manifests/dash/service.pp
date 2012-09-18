@@ -26,7 +26,7 @@ class riemann::dash::service($dash_config_file='') {
 
       file { '/etc/init.d/riemann-dash':
         ensure  => present,
-        mode    => 0755,
+        mode    => '0755',
         content => template('riemann/init/riemann-dash.redhat.erb'),
       }
 

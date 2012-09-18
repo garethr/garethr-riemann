@@ -49,13 +49,13 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
 
       file { '/etc/init.d/riemann-health':
         ensure => present,
-        mode   => 0755,
+        mode   => '0755',
         source => 'puppet:///modules/riemann/init/riemann-health.redhat.sh',
       }
 
       file { '/etc/init.d/riemann-net':
         ensure => present,
-        mode   => 0755,
+        mode   => '0755',
         source => 'puppet:///modules/riemann/init/riemann-net.redhat.sh',
       }
     }

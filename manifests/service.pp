@@ -30,7 +30,7 @@ class riemann::service($config_file) {
 
       file { '/etc/init.d/riemann':
         ensure  => present,
-        mode    => 0755,
+        mode    => '0755',
         content => template('riemann/init/riemann.redhat.erb'),
       }
     }
@@ -42,7 +42,7 @@ class riemann::service($config_file) {
 
   file {'/var/log/riemann':
     ensure => 'directory',
-    mode   => 0755,
+    mode   => '0755',
   }
 
   service {'riemann':

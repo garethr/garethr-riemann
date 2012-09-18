@@ -1,11 +1,6 @@
 class riemann::dash::package {
 
-  # requires puppetlabs::stdlib
-  define ensure_packages {
-    ensure_resource('package', $name, {'ensure' => 'present'})
-  }
-
-  ensure_packages {$riemann::dash::params::packages:}
+  riemann::dash::ensure_packages{$riemann::dash::params::packages:}
 
   package { [
       'riemann-dash'
