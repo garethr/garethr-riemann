@@ -1,12 +1,13 @@
-class riemann::dash::package {
+class riemann::dash::package
+  inherits riemann::dash::params {
 
-  riemann::dash::ensure_packages{$riemann::dash::params::packages:}
+  ensure_packages($packages)
 
   package { [
       'riemann-dash'
     ]:
       ensure   => installed,
-      require  => Package[$riemann::dash::params::packages],
+      require  => Package[$packages],
       provider => gem,
   }
 }

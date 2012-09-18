@@ -1,12 +1,9 @@
-class riemann::dash::service($dash_config_file='') {
-
-  $service_dependencies = [ Service['riemann'],
-                            File['/etc/init.d/riemann-dash'], ]
+class riemann::dash::service($dash_config_file='')
+  inherits riemann::dash::params {
 
   case $::osfamily {
     'Debian': {
 
-      $service_provider = 'redhat'
       $service_dependencies += [ File['/etc/init/riemann-dash.conf']]
 
       file { '/etc/init.d/riemann-dash':
@@ -20,9 +17,8 @@ class riemann::dash::service($dash_config_file='') {
         notify  => Service['riemann-dash'],
       }
     }
-    'RedHat': {
 
-      $service_provider = 'redhat'
+    'RedHat': {
 
       file { '/etc/init.d/riemann-dash':
         ensure  => present,

@@ -1,7 +1,7 @@
-class riemann::package($version) {
+class riemann::package($version) inherits riemann::params {
   include wget
 
-  package { $riemann::params::packages:
+  package { $packages:
       ensure => installed,
   }
 

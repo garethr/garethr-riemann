@@ -1,7 +1,17 @@
-class riemann::dash::params {
+class riemann::tools::params () {
 
-  $service_dependencies = [ Service['riemann'],
-                            File['/etc/init.d/riemann-dash'], ]
+  $health_service_dependencies = [
+      Service['riemann'],
+      Class['riemann::tools::package'],
+      File['/etc/init.d/riemann-health'],
+  ]
+
+  $net_service_dependencies = [
+      Service['riemann'],
+      Class['riemann::tools::package'],
+      File['/etc/init.d/riemann-net'],
+  ]
+
   case $::osfamily {
     'Debian': {
       $service_provider = 'upstart'
@@ -16,7 +26,4 @@ class riemann::dash::params {
       err("$::operatingsystem not supported")
     }
   }
-
-
-
 }

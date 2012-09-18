@@ -1,21 +1,9 @@
-class riemann::tools::service($health_enabled=true, $net_enabled=true) {
-
-  $health_service_dependencies = [
-      Service['riemann'],
-      Class['riemann::tools::package'],
-      File['/etc/init.d/riemann-health'],
-  ]
-
-  $net_service_dependencies = [
-      Service['riemann'],
-      Class['riemann::tools::package'],
-      File['/etc/init.d/riemann-net'],
-  ]
+class riemann::tools::service($health_enabled=true, $net_enabled=true)
+  inherits riemann::tools::params {
 
   case $::osfamily {
     'Debian': {
 
-      $service_provider = 'upstart'
       $health_service_dependencies += [
         File['/etc/init/riemann-health.conf'], ]
       $net_service_dependencies += [
@@ -45,7 +33,6 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
     }
 
     'RedHat': {
-      $service_provider = 'redhat'
 
       file { '/etc/init.d/riemann-health':
         ensure => present,

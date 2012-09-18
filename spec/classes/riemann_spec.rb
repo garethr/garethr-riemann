@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'riemann', :type => :class do
-  it { should include_class('riemann::params') }
   it { should include_class('riemann::package') }
   it { should include_class('riemann::config') }
   it { should include_class('riemann::service') }
@@ -17,10 +16,7 @@ describe 'riemann', :type => :class do
     end
 
     it { should contain_service('riemann').with_provider('upstart')}
-    it {
-      should contain_package('leiningen')
-      should contain_package('clojure1.3')
-    }
+    it { should contain_package('clojure1.3') }
   end
 
   context "On a Redhat OS" do
