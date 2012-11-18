@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'riemann::dash', :type => :class do
   it { should include_class('riemann::dash::package')}

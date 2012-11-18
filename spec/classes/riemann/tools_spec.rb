@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'riemann::tools', :type => :class do
   it { should contain_package('riemann-tools').with_provider('gem')}

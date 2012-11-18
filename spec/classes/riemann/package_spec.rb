@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'riemann::package', :type => :class do
   let(:params) { {'version' => '0.1.2'} }
