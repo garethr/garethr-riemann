@@ -1,15 +1,11 @@
 class riemann::dash::package {
-  package { [
-      'build-essential',
-    ]:
-      ensure => installed,
-  }
+  include gcc
 
   package { [
       'riemann-dash'
     ]:
       ensure   => installed,
-      require  => Package['build-essential'],
+      require  => Class['gcc'],
       provider => gem,
   }
 }

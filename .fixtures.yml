@@ -1,5 +1,6 @@
 fixtures:
   repositories:
+    gcc:  git://github.com/puppetlabs/puppetlabs-gcc.git
     wget: git://github.com/maestrodev/puppet-wget.git
   symlinks:
     riemann: "#{source_dir}"
