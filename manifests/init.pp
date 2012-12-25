@@ -1,5 +1,5 @@
 class riemann(
-  $version='0.1.2',
+  $version='0.1.5',
   $config_file='/etc/riemann.sample.config'
   ){
     class { 'riemann::package': version    => $version }

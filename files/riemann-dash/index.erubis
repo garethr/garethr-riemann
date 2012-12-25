@@ -1,8 +1,4 @@
 <div class="box">
-<h2>Problems</h2>
-<%= state_list query('state != "ok"') %></div>
-
-<div class="box">
 <%= state_chart query('service = "puppet" or service =~ "Puppet%"'), :title => "Puppet" %>
 </div>
 
