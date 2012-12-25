@@ -4,9 +4,9 @@ the event agregation and monitoring tool.
 This module is also available on the [Puppet Forge](https://forge.puppetlabs.com/garethr/riemann)
 
 [![Build
-Status](https://secure.travis-ci.org/garethr/riemann-vagrant.png)](http://travis-ci.org/garethr/riemann-vagrant)
+Status](https://secure.travis-ci.org/garethr/garethr-riemann.png)](http://travis-ci.org/garethr/garethr-riemann)
 [![Dependency
-Status](https://gemnasium.com/garethr/riemann-vagrant.png)](http://gemnasium.com/garethr/riemann-vagrant)
+Status](https://gemnasium.com/garethr/garethr-riemann.png)](http://gemnasium.com/garethr/garethr-riemann)
 
 ## Usage
 
