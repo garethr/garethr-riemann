@@ -1,8 +1,8 @@
 class riemann(
-  $version='0.1.5',
-  $config_file='/etc/riemann.sample.config'
-  ){
-    class { 'riemann::package': version    => $version }
-    include riemann::config
-    class { 'riemann::service': config_file => $config_file }
+  $version = $riemann::params::version,
+  $config_file = $riemann::params::config_file
+) inherits riemann::params {
+  class { 'riemann::package': version => $version }
+  include riemann::config
+  class { 'riemann::service': config_file => $config_file }
 }
