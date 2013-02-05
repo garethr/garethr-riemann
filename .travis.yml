@@ -8,6 +8,9 @@ env:
   - PUPPET_VERSION=2.7.17
   - PUPPET_VERSION=2.7.18
   - PUPPET_VERSION=3.0.1
+  - PUPPET_VERSION=3.1.0
 matrix:
   allow_failures:
-    - env: PUPPET_VERSION=3.0.1
+    - env:
+      - PUPPET_VERSION=3.0.1
+      - PUPPET_VERSION=3.1.0
