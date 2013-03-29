@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'riemann', :type => :class do
-  it { should include_class('riemann::package') }
+  it { should include_class('riemann::install') }
   it { should include_class('riemann::config') }
   it { should include_class('riemann::service') }
   it { should contain_class('wget')}
