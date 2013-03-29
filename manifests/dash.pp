@@ -1,4 +1,9 @@
-class riemann::dash {
+class riemann::dash(
+  $host = $riemann::params::dash_host,
+  $port = $riemann::params::dash_port,
+){
   class { 'riemann::dash::install': } ->
-  class { 'riemann::dash::service': }
+  class { 'riemann::dash::config': } ~>
+  class { 'riemann::dash::service': } ->
+  Class['riemann::dash']
 }
