@@ -1,4 +1,4 @@
-class riemann::tools::package {
+class riemann::tools::install {
   package { [
       'riemann-client',
       'riemann-tools',

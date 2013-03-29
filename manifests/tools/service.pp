@@ -18,7 +18,6 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
     hasrestart => true,
     provider   => upstart,
     require    => [
-      Class['riemann::tools::package'],
       File['/etc/init/riemann-health.conf'],
       File['/etc/init.d/riemann-health'],
     ]
@@ -42,7 +41,6 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
     hasrestart => true,
     provider   => upstart,
     require    => [
-      Class['riemann::tools::package'],
       File['/etc/init/riemann-net.conf'],
       File['/etc/init.d/riemann-net'],
     ]
