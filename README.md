@@ -35,15 +35,6 @@ configuration file.
 In this last case you're responsible for making sure that file exists,
 via another puppet resource or otherwise.
 
-The dashboard class can also be configured by providing your own views
-and controllers. As an example the sample class is provided in riemann::dash.
-The riemann::dash class can be called as follows:
-
-    class { 'riemann::dash': config_file => '/etc/riemann-dash.rb' }
-
-For more information about how to create custom dashboards see the
-[riemann-dash repository](https://github.com/aphyr/riemann-dash).
-
 ## Example
 
 For a fully working example of this module you may also be interested in
