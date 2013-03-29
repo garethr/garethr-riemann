@@ -1,4 +1,4 @@
-class riemann::package($version) {
+class riemann::install {
   include wget
 
   package { [
@@ -9,22 +9,22 @@ class riemann::package($version) {
   }
 
   wget::fetch { 'download_riemann':
-    source      => "http://aphyr.com/riemann/riemann-$version.tar.bz2",
-    destination => "/usr/local/src/riemann-$version.tar.bz2",
+    source      => "http://aphyr.com/riemann/riemann-$riemann::version.tar.bz2",
+    destination => "/usr/local/src/riemann-$riemann::version.tar.bz2",
     before      => Exec['untar_riemann'],
   }
 
   exec { 'untar_riemann':
-    command => "tar xvfj /usr/local/src/riemann-$version.tar.bz2",
+    command => "tar xvfj /usr/local/src/riemann-$riemann::version.tar.bz2",
     cwd     => '/opt',
-    creates => "/opt/riemann-$version",
+    creates => "/opt/riemann-$riemann::version",
     path    => ['/bin',],
     before  => File['/opt/riemann'],
   }
 
   file { '/opt/riemann':
     ensure => link,
-    target => "/opt/riemann-$version",
+    target => "/opt/riemann-$riemann::version",
     notify => Service['riemann'],
   }
 
