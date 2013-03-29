@@ -1,6 +1,21 @@
+# Installs the riemann-dash service.
 class riemann::dash::service(
-  $dash_config_file = ''
+  $config_file = ''
 ) {
+  # content should be set to a default if no file
+  $manage_config_content = $config_file ? {
+    ''      => template('riemann/riemann-dash.conf.erb'),
+    undef   => template('riemann/riemann-dash.conf.erb'),
+    default => undef,
+  }
+
+  # source should be set if we have a config file
+  $manage_config_source = $config_file ? {
+    ''      => undef,
+    undef   => undef,
+    default => $config_file
+  }
+
   file { '/etc/init.d/riemann-dash':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -8,7 +23,8 @@ class riemann::dash::service(
 
   file { '/etc/init/riemann-dash.conf':
     ensure  => present,
-    content => template('riemann/riemann-dash.conf.erb'),
+    source  => $manage_config_source,
+    content => $manage_config_content,
     notify  => Service['riemann-dash'],
   }
 
