@@ -1,6 +1,7 @@
 class riemann::package(
-  $version
-) {
+  $version,
+  $riemann_dir = $riemann::params::dir
+) inherits riemann::params {
   include wget
 
   package { [
@@ -21,10 +22,10 @@ class riemann::package(
     cwd     => '/opt',
     creates => "/opt/riemann-$version",
     path    => ['/bin'],
-    before  => File['/opt/riemann'],
+    before  => File[$riemann_dir],
   }
 
-  file { '/opt/riemann':
+  file { $riemann_dir:
     ensure => link,
     target => "/opt/riemann-$version",
     notify => Service['riemann'],

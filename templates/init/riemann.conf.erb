@@ -2,4 +2,4 @@ description "start and stop riemann"
 author "Gareth Rushgrove"
 
 chdir <%= @riemann_bin_dir %>
-exec /opt/riemann/bin/riemann <%= @config_file %>
+exec riemann <%= @config_file %>

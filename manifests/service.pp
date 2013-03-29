@@ -1,6 +1,21 @@
 class riemann::service(
-  $config_file
+  $config_file = '',
+  $riemann_bin_dir = $riemann::params::bin_dir
 ) {
+  # content should be set to a default if no file
+  $manage_config_content = $config_file ? {
+    ''      => template('riemann/init/riemann.conf.erb'),
+    undef   => template('riemann/init/riemann.conf.erb'),
+    default => undef,
+  }
+
+  # source should be set if we have a config file
+  $manage_config_source = $config_file ? {
+    ''      => undef,
+    undef   => undef,
+    default => $config_file
+  }
+
   file { '/etc/init.d/riemann':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -8,7 +23,8 @@ class riemann::service(
 
   file { '/etc/init/riemann.conf':
     ensure  => present,
-    content => template('riemann/init/riemann.conf.erb'),
+    source  => $manage_config_source,
+    content => $manage_config_content,
   }
 
   service {'riemann':
