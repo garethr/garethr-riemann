@@ -1,4 +1,4 @@
-class riemann::dash::package {
+class riemann::dash::install {
   include gcc
 
   package { [

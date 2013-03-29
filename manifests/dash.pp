@@ -1,4 +1,4 @@
 class riemann::dash {
-  include riemann::dash::package
-  include riemann::dash::service
+  class { 'riemann::dash::install': } ->
+  class { 'riemann::dash::service': }
 }
