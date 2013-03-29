@@ -1,11 +1,13 @@
-class riemann::package($version) {
+class riemann::package(
+  $version
+) {
   include wget
 
   package { [
       'leiningen',
       'clojure1.3',
     ]:
-      ensure => installed,
+    ensure => installed,
   }
 
   wget::fetch { 'download_riemann':
@@ -18,7 +20,7 @@ class riemann::package($version) {
     command => "tar xvfj /usr/local/src/riemann-$version.tar.bz2",
     cwd     => '/opt',
     creates => "/opt/riemann-$version",
-    path    => ['/bin',],
+    path    => ['/bin'],
     before  => File['/opt/riemann'],
   }
 
@@ -27,5 +29,4 @@ class riemann::package($version) {
     target => "/opt/riemann-$version",
     notify => Service['riemann'],
   }
-
 }

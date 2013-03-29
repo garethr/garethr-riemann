@@ -3,7 +3,7 @@ class riemann::tools::package {
       'riemann-client',
       'riemann-tools',
     ]:
-      ensure   => installed,
-      provider => gem,
+    ensure   => installed,
+    provider => gem,
   }
 }

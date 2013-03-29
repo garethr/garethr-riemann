@@ -1,4 +1,6 @@
-class riemann::service($config_file) {
+class riemann::service(
+  $config_file
+) {
   file { '/etc/init.d/riemann':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -6,7 +8,7 @@ class riemann::service($config_file) {
 
   file { '/etc/init/riemann.conf':
     ensure  => present,
-    content => template('riemann/init/riemann.conf.erb')
+    content => template('riemann/init/riemann.conf.erb'),
   }
 
   service {'riemann':
