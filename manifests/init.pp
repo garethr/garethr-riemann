@@ -4,6 +4,10 @@ class riemann(
   $host = $riemann::params::host,
   $port = $riemann::params::port,
 ) inherits riemann::params {
+
+  validate_absolute_path($config_file)
+  validate_string($version, $host, $port)
+
   class { 'riemann::install': } ->
   class { 'riemann::config': } ~>
   class { 'riemann::service': } ->
