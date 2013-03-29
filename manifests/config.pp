@@ -1,4 +1,8 @@
-class riemann::config($riemann_server='localhost', $riemann_port='5555') {
+class riemann::config {
+
+  $host = $riemann::host
+  $port = $riemann::port
+
   file { '/etc/riemann.sample.config':
     ensure => present,
     source => 'puppet:///modules/riemann/riemann.config',

@@ -19,4 +19,8 @@ describe 'riemann', :type => :class do
     it { should contain_file('/etc/init/riemann.conf').with_content(/bob/)}
   end
 
+  context 'without overriding the defaults' do
+    it { should contain_file('/etc/puppet/riemann.yaml').with_content(/localhost/)}
+    it { should contain_file('/etc/puppet/riemann.yaml').with_content(/5555/)}
+  end
 end
