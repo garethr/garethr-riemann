@@ -3,6 +3,7 @@
 	<name>riemann</name>
 	<comment></comment>
 	<projects>
+		<project>epel</project>
 		<project>gcc</project>
 		<project>stdlib</project>
 		<project>wget</project>
