@@ -1,9 +1,0 @@
-<div class="box">
-<%= state_chart query('service = "puppet" or service =~ "Puppet%"'), :title => "Puppet" %>
-</div>
-
-<div class="box">
-<%= state_chart query('service = "cpu" or service = "memory" or service =~ "disk%" or service = "load"'), :title => "Health" %>
-</div>
-
-<div class="box"><%= state_chart query('true'), :title => "Everything" %></div>

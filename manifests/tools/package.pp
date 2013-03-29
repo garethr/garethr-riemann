@@ -1,9 +1,11 @@
-class riemann::tools::package {
+class riemann::tools::package(
+  $ensure = 'installed'
+) {
   package { [
       'riemann-client',
       'riemann-tools',
     ]:
-    ensure   => installed,
+    ensure   => $ensure,
     provider => gem,
   }
 }

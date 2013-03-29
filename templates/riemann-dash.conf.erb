@@ -1,4 +1,5 @@
 description "start and stop riemann-dash"
 author "Gareth Rushgrove"
 
-exec  /opt/vagrant_ruby/bin/riemann-dash <%= dash_config_file %>
+chdir <%= @ruby_bin_dir %>
+exec  riemann-dash <%= @dash_config_file %>
