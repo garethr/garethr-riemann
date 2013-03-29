@@ -13,22 +13,22 @@
     "Gemfile": "7f252ebc330cb6aa7e28c854750360c8",
     "Gemfile.lock": "c2cd23342abc2b1e207e7c5d32cb3c06",
     "LICENSE": "47bbee59c4c1cb14cc3667035a227be0",
-    "Modulefile": "d22b319ef3f1118beedb60d7a637f02d",
+    "Modulefile": "46ffa4d30282af4135494f6ece184548",
     "README.md": "9b81ac1a7d903cec90e456dd879bca22",
     "Rakefile": "c6a91ef43608c5d4b22bc7e50a94d6a5",
-    "files\\riemann-health.conf": "7e705b5785823193f64798aee6ce4e0b",
-    "files\\riemann-net.conf": "640646e09e2822fefb7dab00b4b64698",
+    "files\\riemann-health.conf": "7c4b90ecdc23c33bf4e134d7d8061343",
+    "files\\riemann-net.conf": "cafd7699fb919e33d322ba5720e72bb2",
     "files\\riemann.config": "a1e6222077853fab0c0c43c89aa53367",
     "manifests\\config.pp": "54c386a0da59046bd0717bca79e7cc21",
-    "manifests\\dash.pp": "c306a687567d40135bd1d8b2b6184a72",
-    "manifests\\dash\\config.pp": "952ff6a1acb0e613d4ac23b169a21364",
-    "manifests\\dash\\package.pp": "b66ac18f7177e0e0ff4e0e446ae445bb",
+    "manifests\\dash.pp": "9a6de15f2e38b2bd451d01a48293b9aa",
+    "manifests\\dash\\config.pp": "4e6c0c595f273c954c0414dfef470d72",
+    "manifests\\dash\\package.pp": "2a4ce0fc2b76fdc22b740018dec1d570",
     "manifests\\dash\\service.pp": "a0f8374b18fd00f47c138fb7fe5775ee",
-    "manifests\\init.pp": "1536c367ca740c1289852db1afd7bb16",
+    "manifests\\init.pp": "71f848fb3a7d60c9683e12fa12c663c6",
     "manifests\\package.pp": "fa4265c34eadf28103e511a1b217f0f9",
     "manifests\\params.pp": "e52a3628fdc88d8b505124cbd6d1fac3",
     "manifests\\service.pp": "63ddd15cbca4723dae74b92dc2eca44b",
-    "manifests\\tools.pp": "49892d9e17272c3e73fdc5604f3072f3",
+    "manifests\\tools.pp": "658ef0d4088eb4df0bfe528a576365b9",
     "manifests\\tools\\package.pp": "7fc13b6b6061dff1d5f7afdff3aa2aeb",
     "manifests\\tools\\service.pp": "7e4a44fdc6eba2d5ecf8aff6ab01722c",
     "spec\\classes\\riemann\\config_spec.rb": "cfb3b8f63e9b3d01cefb6a678ceec5ca",
@@ -48,6 +48,10 @@
     },
     {
       "name": "puppetlabs/gcc"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "~3.2.0"
     }
   ]
 }

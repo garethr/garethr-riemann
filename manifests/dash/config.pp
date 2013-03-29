@@ -12,9 +12,13 @@ class riemann::dash::config(
   $bind = 'localhost',
   $file = '/etc/riemann-dash.rb',
 ) {
+  anchor { 'riemann::dash::config': } ->
+
   file { $file:
     ensure  => present,
     source  => template('riemann/riemann-dash.rb.erb'),
     notify  => Service['riemann-dash'],
-  }
+  } ->
+
+  anchor { 'riemann::dash::config': }
 }
