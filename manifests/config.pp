@@ -1,5 +1,4 @@
 class riemann::config {
-
   $host = $riemann::host
   $port = $riemann::port
   $config_file = $riemann::config_file
