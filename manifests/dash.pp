@@ -9,7 +9,12 @@ class riemann::dash(
   $config_file = ''
 ) {
   include riemann::dash::package
+
+  anchor { 'riemann::dash::start': } ->
+
   class { 'riemann::dash::service':
     config_file => $config_file,
-  }
+  } ->
+
+  anchor { 'riemann::dash::end': }
 }
