@@ -8,6 +8,8 @@ describe 'riemann', :type => :class do
   it { should contain_file('/etc/riemann.sample.config') }
   it { should contain_file('/etc/puppet/riemann.yaml') }
   it { should contain_service('riemann').with_provider('upstart')}
+  it { should contain_wget__fetch('download_riemann')}
+  it { should contain_exec('untar_riemann')}
 
   context 'passing a version number' do
     let(:params) { {'version' => '1.0.0'} }
