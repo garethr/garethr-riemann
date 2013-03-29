@@ -1,6 +1,5 @@
 class riemann::dash::package {
   include gcc
-
   package { [
       'riemann-dash'
     ]:

@@ -1,4 +1,6 @@
-class riemann::dash::service($dash_config_file='') {
+class riemann::dash::service(
+  $dash_config_file = ''
+) {
   file { '/etc/init.d/riemann-dash':
     ensure => link,
     target => '/lib/init/upstart-job',

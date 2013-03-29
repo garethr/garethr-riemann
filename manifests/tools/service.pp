@@ -1,5 +1,7 @@
-class riemann::tools::service($health_enabled=true, $net_enabled=true) {
-
+class riemann::tools::service(
+  $health_enabled = true,
+  $net_enabled    = true
+) {
   file { '/etc/init.d/riemann-health':
     ensure => link,
     target => '/lib/init/upstart-job',
@@ -21,7 +23,7 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
       Class['riemann::tools::package'],
       File['/etc/init/riemann-health.conf'],
       File['/etc/init.d/riemann-health'],
-    ]
+    ],
   }
 
   file { '/etc/init.d/riemann-net':
@@ -45,6 +47,6 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
       Class['riemann::tools::package'],
       File['/etc/init/riemann-net.conf'],
       File['/etc/init.d/riemann-net'],
-    ]
+    ],
   }
 }
