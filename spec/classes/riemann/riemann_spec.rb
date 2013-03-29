@@ -21,8 +21,23 @@ describe 'riemann', :type => :class do
     it { should contain_file('/etc/init/riemann.conf').with_content(/bob/)}
   end
 
-  context 'without overriding the defaults' do
+  context 'without overriding the default host and port' do
     it { should contain_file('/etc/puppet/riemann.yaml').with_content(/localhost/)}
     it { should contain_file('/etc/puppet/riemann.yaml').with_content(/5555/)}
+  end
+
+  context 'overriding the default host and port' do
+    let(:params) { {'host' => '0.0.0.0', 'port' => '6000'} }
+    it { should contain_file('/etc/puppet/riemann.yaml').with_content(/0\.0\.0\.0/)}
+    it { should contain_file('/etc/puppet/riemann.yaml').with_content(/6000/)}
+  end
+
+  context 'with an invalid config file path' do
+    let(:params) { {'config_file' => 'not a path'} }
+    it do
+      expect {
+        should contain_wget__fetch('download_riemann')
+      }.to raise_error(Puppet::Error)
+    end
   end
 end

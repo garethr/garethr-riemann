@@ -14,4 +14,13 @@ describe 'riemann::tools', :type => :class do
     it { should contain_service('riemann-net').with_provider('upstart')}
     it { should contain_service('riemann-health').with_provider('upstart')}
   end
+
+  context 'passing invalid params' do
+    let(:params) { { 'health_enabled' => 'invalid'} }
+    it do
+      expect {
+        should contain_package('riemann-tools')
+      }.to raise_error(Puppet::Error)
+    end
+  end
 end
