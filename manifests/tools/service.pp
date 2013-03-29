@@ -1,14 +1,14 @@
 class riemann::tools::service {
   service {'riemann-health':
     ensure     => running,
-    enable     => $health_enabled,
+    enable     => $riemann::tools::health_enabled,
     hasstatus  => true,
     hasrestart => true,
     provider   => upstart,
   }
   service {'riemann-net':
     ensure     => running,
-    enable     => $net_enabled,
+    enable     => $riemann::tools::net_enabled,
     hasstatus  => true,
     hasrestart => true,
     provider   => upstart,
