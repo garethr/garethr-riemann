@@ -1,0 +1,56 @@
+{
+  "name": "garethr-riemann",
+  "author": "garethr",
+  "description": "",
+  "license": "Apache License, Version 2.0",
+  "project_page": "https://github.com/garethr/garethr-riemann",
+  "source": "",
+  "summary": "Module to manage the Riemann monitoring tool",
+  "version": "0.1.0",
+  "checksums": {
+    ".fixtures.yml": "07b814ae0326d6132a47950872c8fece",
+    ".travis.yml": "472d9a0d8b1fc3eddbab8e974c243c18",
+    "Gemfile": "84708ea1c9b80130a40fde87376882b9",
+    "Gemfile.lock": "c2cd23342abc2b1e207e7c5d32cb3c06",
+    "LICENSE": "47bbee59c4c1cb14cc3667035a227be0",
+    "Modulefile": "d22b319ef3f1118beedb60d7a637f02d",
+    "README.md": "9b81ac1a7d903cec90e456dd879bca22",
+    "Rakefile": "c6a91ef43608c5d4b22bc7e50a94d6a5",
+    "files\\riemann-dash.rb": "b8322b1112cea34168bfde9f56b4fda1",
+    "files\\riemann-dash\\css.scss": "f17c9f05e1a36f13ff86274f65db5cf6",
+    "files\\riemann-dash\\index.erubis": "ae5f7ada3b8ce76c6d5108ee61f88884",
+    "files\\riemann-dash\\layout.erubis": "1777e3b28a2473175dbe81a255c618de",
+    "files\\riemann-health.conf": "7e705b5785823193f64798aee6ce4e0b",
+    "files\\riemann-net.conf": "e16350468e56d165c26bc4a0c7772521",
+    "files\\riemann.config": "a1e6222077853fab0c0c43c89aa53367",
+    "manifests\\config.pp": "c73941a31f5a932092ecfa7f2ec18fe0",
+    "manifests\\dash.pp": "d21fc100fcae03cc848903d1854e9228",
+    "manifests\\dash\\package.pp": "78810911ba1dfc7525bc21f2b7b78f17",
+    "manifests\\dash\\sample.pp": "70f9e81f8f60e0918f57e8ffb730a593",
+    "manifests\\dash\\service.pp": "7867eb119af9af30a9f76ca75783786f",
+    "manifests\\init.pp": "e8c59c065b8651260b890d6d07e37dc7",
+    "manifests\\package.pp": "342df71016df64b461583d88b64b2bf5",
+    "manifests\\params.pp": "3da16165adbc3d436c2b24c3ba1a49f1",
+    "manifests\\service.pp": "50e785f043a83bab6a0a5a8290d59430",
+    "manifests\\tools.pp": "f2440406c0dc7f428ceeefc56fec5b36",
+    "manifests\\tools\\package.pp": "9aa3dd1be583bb40aadba52c01a657ac",
+    "manifests\\tools\\service.pp": "dedfb7dd0e8c5fa35a4e6314c133731c",
+    "spec\\classes\\riemann\\config_spec.rb": "e8d6b53d77c1a7a8ac8d9b957fbf29be",
+    "spec\\classes\\riemann\\dash_spec.rb": "ab90c45b556b436c3e5886766af8549d",
+    "spec\\classes\\riemann\\package_spec.rb": "e7eaf4a22b012723298797df94cf2a9a",
+    "spec\\classes\\riemann\\riemann_spec.rb": "651c9fea341ab224c2b347ca4aa28790",
+    "spec\\classes\\riemann\\tools_spec.rb": "fc7b0c810d62e0553a613bb2f89adabf",
+    "spec\\spec_helper.rb": "792eeb7aa7edafb93e2bc1d27c5e75c5",
+    "templates\\init\\riemann.conf.erb": "52b8f641aa2d0e65c86de2337bc37487",
+    "templates\\puppet\\riemann.yaml.erb": "d67c4600a270508044ab78fb7b892622",
+    "templates\\riemann-dash.conf.erb": "dc1e630dd88b408b139860b8358eb4a9"
+  },
+  "dependencies": [
+    {
+      "name": "maestrodev/wget"
+    },
+    {
+      "name": "puppetlabs/gcc"
+    }
+  ]
+}

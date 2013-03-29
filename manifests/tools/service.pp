@@ -47,5 +47,4 @@ class riemann::tools::service($health_enabled=true, $net_enabled=true) {
       File['/etc/init.d/riemann-net'],
     ]
   }
-
 }
