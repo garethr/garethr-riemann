@@ -13,7 +13,7 @@ class riemann::dash::config {
   }
 
   file { '/etc/riemann-dash.rb':
-    ensure => present,
+    ensure  => present,
     content => template('riemann/etc/riemann-dash.rb.erb'),
   }
 }

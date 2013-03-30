@@ -1,6 +1,6 @@
 class riemann::tools::config {
-  $health_enabled=$riemann::tools::health_enabled
-  $net_enabled=$riemann::tools::net_enabled
+  $health_enabled = $riemann::tools::health_enabled
+  $net_enabled = $riemann::tools::net_enabled
 
   file { '/etc/init.d/riemann-health':
     ensure => link,
@@ -8,8 +8,8 @@ class riemann::tools::config {
   }
 
   file { '/etc/init/riemann-health.conf':
-    ensure  => present,
-    source  => 'puppet:///modules/riemann/etc/init/riemann-health.conf',
+    ensure => present,
+    source => 'puppet:///modules/riemann/etc/init/riemann-health.conf',
   }
 
   file { '/etc/init.d/riemann-net':
@@ -18,7 +18,7 @@ class riemann::tools::config {
   }
 
   file { '/etc/init/riemann-net.conf':
-    ensure  => present,
-    source  => 'puppet:///modules/riemann/etc/init/riemann-net.conf',
+    ensure => present,
+    source => 'puppet:///modules/riemann/etc/init/riemann-net.conf',
   }
 }
