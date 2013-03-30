@@ -4,8 +4,8 @@ class riemann::dash::service(
   $log_dir     = $riemann::dash::params::log_dir
 ) {
   riemann::mixsvc { 'riemann-dash':
-    log_dir      => $log_dir,
-    config_file  => $config_file,
+    log_dir              => $log_dir,
+    config_file          => $config_file,
     config_file_template => $riemann::dash::params::dash_config_template
   }
 }
