@@ -4,14 +4,17 @@
 # - upstart for debian
 # - initv for rhel (currently)
 # - log dir
-define riemann::mixsvc(
+define riemann::utils::mixsvc(
   $ensure               = 'running',
   $enable               = true,
   $config_file          = '',
   $config_file_template = '',
   $user                 = '',
   $group                = '',
+  $grep                 = undef,
   $log_dir,
+  $exec,
+  $description
 ) {
   $service_provider = $::osfamily ? {
     'Amazon' => 'redhat',
@@ -61,30 +64,20 @@ define riemann::mixsvc(
 
   case $::osfamily {
     'Debian': {
-      Service[$title] { require +> File['/etc/init/$title.conf'] }
-
-      file { '/etc/init.d/$title':
-        ensure => link,
-        target => '/lib/init/upstart-job',
+      riemann::utils::upconf { $title:
+        user        => $user,
+        description => $description,
+        exec        => $exec
       }
-
-      file { '/etc/init/$title.conf':
-        ensure  => present,
-        source  => $manage_config_source,
-        content => $manage_config_content,
-      }
-
-      File['/etc/init/$title.conf'] ~> Service[$title]
     }
     'RedHat': {
-      file { '/etc/init.d/$title':
-        ensure  => present,
-        mode    => '0755',
-        source  => $manage_config_source,
-        content => $manage_config_content,
+      riemann::utils::initvconf { $title:
+        user        => $user,
+        description => $description,
+        exec        => $exec,
+        log_dir     => $log_dir,
+        grep        => $grep,
       }
-
-      File['/etc/init.d/$title'] ~> Service[$title]
     }
     default: {
       err("$::operatingsystem not supported")

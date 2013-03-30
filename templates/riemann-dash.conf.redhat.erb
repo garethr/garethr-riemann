@@ -6,9 +6,9 @@
 # description: Riemann Dashboard
 # processname: riemann-dash
 
-riemann_bin="/usr/bin/riemann-dash"
-riemann_conf="<%= dash_config_file %>"
-riemann_log="/var/log/riemann/riemann-dash.log"
+riemann_bin="<%= @exec %>"
+riemann_conf="<%= @dash_config_file %>"
+riemann_log="<%= @log_dir %>/riemann-dash.log"
 
 find_riemann_process () {
     PIDTEMP=`ps ux | grep riemann-dash | grep ruby | awk '{ print $2 }'`
@@ -67,4 +67,3 @@ status)
         RETVAL=1
 esac
 exit 0
-
