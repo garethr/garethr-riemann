@@ -7,8 +7,8 @@ class riemann::tools(
   anchor { 'riemann::tools::start': } ->
 
   class { 'riemann::tools::service':
-    health_enabled => $health_enabled,
-    net_enabled    => $net_enabled,
+    health_enable => $health_enabled,
+    net_enable    => $net_enabled,
   } ->
 
   anchor { 'riemann::tools::end': }
