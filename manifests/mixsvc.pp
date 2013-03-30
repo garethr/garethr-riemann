@@ -1,8 +1,16 @@
+# create a debian, rhel service with infra:
+# - user for svc
+# - group for svc
+# - upstart for debian
+# - initv for rhel (currently)
+# - log dir
 define riemann::mixsvc(
   $ensure               = 'running',
   $enable               = true,
   $config_file          = '',
   $config_file_template = '',
+  $user                 = '',
+  $group                = '',
   $log_dir,
 ) {
   $service_provider = $::osfamily ? {
@@ -22,7 +30,33 @@ define riemann::mixsvc(
   $manage_config_source = $config_file ? {
     ''      => undef,
     undef   => undef,
-    default => $config_file
+    default => $config_file,
+  }
+
+  $manage_user = $user ? {
+    ''      => $title,
+    undef   => $title,
+    default => $user,
+  }
+
+  $manage_group = $group ? {
+    ''      => $title,
+    undef   => $title,
+    default => $group,
+  }
+
+  group { $group:
+    ensure  => present,
+    system  => true
+  }
+
+  user { $user:
+    ensure  => present,
+    system  => true,
+    gid     => $group,
+    #home    => ,
+    shell   => '/bin/bash',
+    require => Group[$group], 
   }
 
   case $::osfamily {

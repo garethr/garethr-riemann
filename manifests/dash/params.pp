@@ -1,5 +1,4 @@
 class riemann::dash::params {
-
   case $::osfamily {
     'Debian': {
       $service_provider = 'upstart'

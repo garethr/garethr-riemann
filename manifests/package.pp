@@ -2,14 +2,11 @@ class riemann::package(
   $version,
   $riemann_dir = $riemann::params::dir
 ) inherits riemann::params {
-  include wget
-
-  package { [
-      'leiningen',
-      'clojure1.3',
-    ]:
+  package { $riemann::params::packages:
     ensure => installed,
   }
+
+  class { 'wget': } ->
 
   wget::fetch { 'download_riemann':
     source      => "http://aphyr.com/riemann/riemann-$version.tar.bz2",

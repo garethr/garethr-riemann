@@ -1,4 +1,6 @@
-# Includes Package['riemann-dash'].
+# Includes Package['riemann-dash']. You also need
+# to instantiate Class['riemann::dash::config'], and
+# pass its filename as parameter to this class.
 #
 # Parameters:
 #   config_file: the path to the configuration file
@@ -8,9 +10,10 @@
 class riemann::dash(
   $config_file = ''
 ) {
-  include riemann::dash::package
 
   anchor { 'riemann::dash::start': } ->
+
+  class { 'riemann::dash::package': } ->
 
   class { 'riemann::dash::service':
     config_file => $config_file,
