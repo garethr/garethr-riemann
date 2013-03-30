@@ -23,7 +23,7 @@ find_proc () {
 
 start () {
     LOG_DIR=<%= @log_dir %>
-    nohup ${proc_bin} ${proc_args} > ${proc_log} &
+    nohup su --login <%= @user || 'root' %> --command ${proc_bin} ${proc_args} > ${proc_log} &
 }
 
 stop () {

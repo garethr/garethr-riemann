@@ -4,6 +4,7 @@
 # - upstart for debian
 # - initv for rhel (currently)
 # - log dir
+# - exec: binary to execute
 define riemann::utils::mixsvc(
   $ensure               = 'running',
   $enable               = true,
@@ -12,6 +13,7 @@ define riemann::utils::mixsvc(
   $user                 = '',
   $group                = '',
   $grep                 = undef,
+  $home                 = undef,
   $log_dir,
   $exec,
   $description
@@ -21,19 +23,6 @@ define riemann::utils::mixsvc(
     'RedHat' => 'redhat',
     'Debian' => 'upstart',
     default  => 'upstart'
-  }
-  # content should be set to a default if no file
-  $manage_config_content = $config_file ? {
-    ''      => template($config_file_template),
-    undef   => template($config_file_template),
-    default => undef,
-  }
-
-  # source should be set if we have a config file
-  $manage_config_source = $config_file ? {
-    ''      => undef,
-    undef   => undef,
-    default => $config_file,
   }
 
   $manage_user = $user ? {
@@ -57,7 +46,7 @@ define riemann::utils::mixsvc(
     ensure  => present,
     system  => true,
     gid     => $group,
-    #home    => ,
+    home    => $home,
     shell   => '/bin/bash',
     require => Group[$group], 
   }
@@ -67,7 +56,9 @@ define riemann::utils::mixsvc(
       riemann::utils::upconf { $title:
         user        => $user,
         description => $description,
-        exec        => $exec
+        exec        => $exec,
+        file        => $config_file,
+        template    => $config_file_template,
       }
     }
     'RedHat': {
@@ -77,6 +68,8 @@ define riemann::utils::mixsvc(
         exec        => $exec,
         log_dir     => $log_dir,
         grep        => $grep,
+        file        => $config_file,
+        template    => $config_file_template,
       }
     }
     default: {
