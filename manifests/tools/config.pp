@@ -9,7 +9,7 @@ class riemann::tools::config {
 
   file { '/etc/init/riemann-health.conf':
     ensure  => present,
-    source  => 'puppet:///modules/riemann/riemann-health.conf',
+    source  => 'puppet:///modules/riemann/etc/init/riemann-health.conf',
   }
 
   file { '/etc/init.d/riemann-net':
@@ -19,6 +19,6 @@ class riemann::tools::config {
 
   file { '/etc/init/riemann-net.conf':
     ensure  => present,
-    source  => 'puppet:///modules/riemann/riemann-net.conf',
+    source  => 'puppet:///modules/riemann/etc/init/riemann-net.conf',
   }
 }
