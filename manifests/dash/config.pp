@@ -18,7 +18,7 @@ class riemann::dash::config {
       file { '/etc/init.d/riemann-dash':
         ensure  => present,
         mode    => '0755',
-        content => template('riemann/etc/init/riemann-dash.conf.redhat.erb'),
+        source  => 'puppet:///modules/riemann/etc/init/riemann-dash.conf.redhat',
       }
     }
   }
