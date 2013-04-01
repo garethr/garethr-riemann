@@ -7,7 +7,6 @@ class riemann::install {
         command     => '/usr/bin/apt-get update',
         before      => Class['java'],
       }
-      include apt
       include java
     }
     'RedHat', 'Amazon': {
