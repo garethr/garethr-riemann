@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'riemann::dash', :type => :class do
+  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
+
   it { should create_class('riemann::dash::install')}
   it { should create_class('riemann::dash::config')}
   it { should create_class('riemann::dash::service')}
@@ -27,6 +29,23 @@ describe 'riemann::dash', :type => :class do
         should contain_package('riemann-dash')
       }.to raise_error(Puppet::Error)
     end
+  end
+
+  context 'with an invalid operating system' do
+    let(:facts) { {:osfamily => 'invalid'} }
+    it do
+      expect {
+        should contain_package('riemann-dash')
+      }.to raise_error(Puppet::Error)
+    end
+  end
+
+  context 'when running on RedHat/Centos' do
+    let(:facts) { {:osfamily => 'RedHat'} }
+    it { should include_class('epel') }
+    it { should contain_file('/etc/init.d/riemann-dash').with_mode('0755')}
+    it { should_not contain_file('/etc/init/riemann-dash.conf')}
+    it { should contain_service('riemann-dash').with_provider('redhat')}
   end
 
 end

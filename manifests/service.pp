@@ -4,6 +4,6 @@ class riemann::service {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    provider   => upstart,
+    provider   => $riemann::params::service_provider,
   }
 }
