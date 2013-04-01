@@ -7,6 +7,8 @@ describe 'riemann', :type => :class do
   it { should include_class('riemann::config') }
   it { should include_class('riemann::service') }
   it { should contain_class('wget')}
+  it { should contain_class('java')}
+  it { should_not include_class('epel') }
   it { should contain_file('/etc/riemann.sample.config') }
   it { should contain_file('/etc/puppet/riemann.yaml') }
   it { should contain_service('riemann').with_provider('upstart')}
@@ -42,4 +44,22 @@ describe 'riemann', :type => :class do
       }.to raise_error(Puppet::Error)
     end
   end
+
+  context 'with an invalid operating system' do
+    let(:facts) { {:osfamily => 'invalid'} }
+    it do
+      expect {
+        should contain_wget__fetch('download_riemann')
+      }.to raise_error(Puppet::Error)
+    end
+  end
+
+  context 'when running on RedHat/Centos' do
+    let(:facts) { {:osfamily => 'RedHat'} }
+    it { should include_class('epel') }
+    it { should contain_file('/etc/init.d/riemann').with_mode('0755')}
+    it { should_not contain_file('/etc/init/riemann.conf')}
+    it { should contain_service('riemann').with_provider('redhat')}
+  end
+
 end

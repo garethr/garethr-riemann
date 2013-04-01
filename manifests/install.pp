@@ -14,9 +14,6 @@ class riemann::install {
         distribution => 'java-1.7.0-openjdk',
       }
     }
-    default: {
-      err("${::operatingsystem} not supported")
-    }
   }
 
   wget::fetch { 'download_riemann':

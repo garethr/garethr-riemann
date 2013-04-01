@@ -15,7 +15,7 @@ class riemann::params {
       $service_provider = redhat
     }
     default: {
-      err("${::operatingsystem} not supported")
+      fail("${::operatingsystem} not supported")
     }
   }
 
