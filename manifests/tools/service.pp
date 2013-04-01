@@ -4,13 +4,13 @@ class riemann::tools::service {
     enable     => $riemann::tools::health_enabled,
     hasstatus  => true,
     hasrestart => true,
-    provider   => upstart,
+    provider   => $riemann::params::service_provider,
   }
   service {'riemann-net':
     ensure     => running,
     enable     => $riemann::tools::net_enabled,
     hasstatus  => true,
     hasrestart => true,
-    provider   => upstart,
+    provider   => $riemann::params::service_provider,
   }
 }

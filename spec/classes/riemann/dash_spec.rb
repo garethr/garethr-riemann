@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'riemann::dash', :type => :class do
+  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
+
   it { should create_class('riemann::dash::install')}
   it { should create_class('riemann::dash::config')}
   it { should create_class('riemann::dash::service')}

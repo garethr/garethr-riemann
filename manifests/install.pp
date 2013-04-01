@@ -1,12 +1,23 @@
 class riemann::install {
   include wget
- 
-  # TODO this should be refactored into a separate module
-  package { [
-      'leiningen',
-      'clojure1.3',
-    ]:
-      ensure => installed,
+
+  case $::osfamily {
+    'Debian': {
+      exec { 'riemann-apt-get-update':
+        command     => '/usr/bin/apt-get update',
+        before      => Class['java'],
+      }
+      include apt
+      include java
+    }
+    'RedHat', 'Amazon': {
+      class { 'java':
+        distribution => 'java-1.7.0-openjdk',
+      }
+    }
+    default: {
+      err("${::operatingsystem} not supported")
+    }
   }
 
   wget::fetch { 'download_riemann':
@@ -21,10 +32,9 @@ class riemann::install {
   }
 
   exec { 'untar_riemann':
-    command => "tar xvfj /usr/local/src/riemann-${riemann::version}.tar.bz2",
+    command => "/bin/tar --bzip2 -xvf /usr/local/src/riemann-${riemann::version}.tar.bz2",
     cwd     => '/opt',
     creates => "/opt/riemann-${riemann::version}",
-    path    => ['/bin',],
     before  => File['/opt/riemann'],
   }
 

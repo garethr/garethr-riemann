@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'riemann', :type => :class do
+  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
+
   it { should include_class('riemann::install') }
   it { should include_class('riemann::config') }
   it { should include_class('riemann::service') }

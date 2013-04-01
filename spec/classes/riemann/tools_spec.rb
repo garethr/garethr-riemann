@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'riemann::tools', :type => :class do
+  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
+
   it { should contain_package('riemann-tools').with_provider('gem')}
   it { should contain_package('riemann-client').with_provider('gem')}
 
