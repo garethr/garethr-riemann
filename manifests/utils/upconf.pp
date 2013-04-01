@@ -20,7 +20,8 @@ define riemann::utils::upconf(
   $user,
   $description,
   $respawn,
-  $exec
+  $exec,
+  $args
 ) {
   # content should be set to a default if no file
   $manage_config_content = $file ? {

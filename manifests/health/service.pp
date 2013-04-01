@@ -10,8 +10,8 @@ class riemann::health::service(
     ensure      => $ensure,
     enable      => $enable,
     exec        => '/usr/bin/riemann-health',
+    args        => '',
     description => 'Riemann Health Process',
-    grep        => 'grep riemann-health | grep ruby',
     group       => $group,
   }
 }

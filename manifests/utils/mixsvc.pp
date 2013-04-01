@@ -6,7 +6,6 @@
 # - group for svc
 # - upstart for debian
 # - initv for rhel (currently)
-# - log dir
 # - exec: binary to execute
 define riemann::utils::mixsvc(
   $ensure               = 'running',
@@ -15,11 +14,11 @@ define riemann::utils::mixsvc(
   $config_file_template = undef,
   $user                 = '',
   $group                = '',
-  $grep                 = undef,
   $home                 = undef,
   $respawn              = true,
   $log_dir,
   $exec,
+  $args,
   $description
 ) {
   $service_provider = $::osfamily ? {
@@ -28,26 +27,10 @@ define riemann::utils::mixsvc(
     'Debian' => 'upstart',
     default  => 'upstart'
   }
-
-  $manage_user = $user ? {
+  $manage_user = $name ? {
     ''      => $title,
     undef   => $title,
-    default => $user,
-  }
-
-  $manage_group = $group ? {
-    ''      => $title,
-    undef   => $title,
-    default => $group,
-  }
-
-  user { $manage_user:
-    ensure  => present,
-    system  => true,
-    gid     => $manage_group,
-    home    => $home,
-    shell   => '/bin/bash',
-    require => Group[$manage_group],
+    default => $name,
   }
 
   case $::osfamily {
@@ -56,6 +39,7 @@ define riemann::utils::mixsvc(
         user        => $manage_user,
         description => $description,
         exec        => $exec,
+        args        => $args,
         file        => $config_file,
         template    => $config_file_template,
         respawn     => $respawn
@@ -66,8 +50,7 @@ define riemann::utils::mixsvc(
         user        => $manage_user,
         description => $description,
         exec        => $exec,
-        log_dir     => $log_dir,
-        grep        => $grep,
+        args        => $args,
         file        => $config_file,
         template    => $config_file_template,
       }
@@ -76,11 +59,23 @@ define riemann::utils::mixsvc(
       err("$::operatingsystem not supported")
     }
   }
-
+  
   if ! defined(File[$log_dir]) {
     file { $log_dir:
       ensure => 'directory',
       mode   => '0755',
+      owner  => 'root',
+      group  => 'root',
+    }
+  }
+
+  if ! defined(User[$manage_user]) {
+    user { $manage_user:
+      ensure  => present,
+      system  => true,
+      gid     => $group,
+      home    => $home,
+      shell   => '/bin/bash',
     }
   }
 
@@ -90,8 +85,6 @@ define riemann::utils::mixsvc(
     hasstatus  => true,
     hasrestart => true,
     provider   => $service_provider,
-    require    => [
-      File["/etc/init.d/$title"]
-    ],
+    require    => File["/etc/init.d/$title"],
   }
 }

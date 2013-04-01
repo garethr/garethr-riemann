@@ -11,8 +11,8 @@ class riemann::net::service(
     ensure      => $ensure,
     enable      => $enable,
     exec        => '/usr/bin/riemann-net',
+    args        => '',
     description => 'Riemann Net Process',
-    grep        => 'grep riemann-net | grep ruby',
     group       => $group,
   }
 }

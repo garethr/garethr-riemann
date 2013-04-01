@@ -6,12 +6,11 @@ class riemann::riak::service(
   $group   = $riemann::group
 
   riemann::utils::mixsvc { 'riemann-riak':
-    log_dir     => $log_dir,
     ensure      => $ensure,
     enable      => $ensure,
     exec        => '/usr/bin/riemann-riak',
+    args        => '',
     description => 'Riemann Riak - Riak monitoring',
-    grep        => 'grep riemann-riak | grep ruby',
     group       => $group,
   }
 }

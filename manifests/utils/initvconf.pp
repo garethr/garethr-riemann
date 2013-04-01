@@ -1,12 +1,11 @@
 define riemann::utils::initvconf(
-  $enable      = 'present',
-  $file        = '',
-  $template    = 'riemann/initv.conf.erb',
-  $user        = undef,
-  $description = undef,
-  $grep        = "grep $title",
-  $log_dir     = "/var/log/$title",
-  $args        = '',
+  $enable       = 'present',
+  $file         = '',
+  $template     = 'riemann/initv.conf.erb',
+  $user         = undef,
+  $description  = undef,
+  $extra_script = undef,
+  $args         = '',
   $exec
 ) {
   # content should be set to a default if no file

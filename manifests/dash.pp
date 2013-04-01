@@ -6,13 +6,22 @@
 #     Sinatra web configuration file. Defaults to a sane
 #     default if left empty.
 class riemann::dash(
-  $config_file          = '',
+  $config_file_source   = '',
   $config_file_template = 'riemann/riemann-dash.rb.erb',
-  $host        = $riemann::dash::params::host,
-  $port        = $riemann::dash::params::port,
-  $log_dir     = $riemann::dash::params::log_dir
-) inherits riemann::dash::params {
+  $host                 = $riemann::params::dash_host,
+  $port                 = $riemann::params::dash_port,
+  $log_dir               = $riemann::params::log_dir
+) inherits riemann::params {
+  $config_file = $riemann::params::dash_config_file
+  $user        = $riemann::params::dash_user
+
   anchor { 'riemann::dash::start': }
+
+  riemann::utils::stduser { $user:
+    group => $group,
+    require => Anchor['riemann::dash::start'],
+    before  => Anchor['riemann::dash::end'],
+  } ->
 
   class { 'riemann::dash::package':
     require => Anchor['riemann::dash::start'],

@@ -1,66 +1,83 @@
-#! /bin/sh
-#
-# Start/Stop <%= @description %>
-#
-# chkconfig: 345 99 99
-# description: <%= @description %>
-# processname: <%= @exec %>
-<% grep = @grep || "grep #{@title}" %>
-title="<%= @title %>"
-proc_bin="<%= @exec %>"
-proc_args="<%= @args %>"
-proc_log="<%= @log_dir %>/<%= @title %>.log"
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:          <%= @title %>
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:
+# Default-Stop:      0 1 6
+# Short-Description: <%= @description %>
+# chkconfig: - 80 15
+# Description: <%= @description %>
+### END INIT INFO
 
-find_proc () {
-    PIDTEMP=`ps ux | <%= grep %> | awk '{ print $2 }'`
-    # Pid not found
-    if [ "x$PIDTEMP" = "x" ]; then
-        PID=-1
-    else
-        PID=$PIDTEMP
-    fi
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+<% if @extra_script -%>
+<%= @extra_script %>
+<% end -%>
+
+SVC_USER=<%= @user %>
+
+DAEMON=<%= @exec %>
+NAME=<%= @title %>
+PID_FILE=${PIDFILE:-/var/run/${NAME}.pid}
+LOCK_FILE=${LOCKFILE:-/var/lock/subsys/${NAME}}
+NFILES=${NFILES:-32768}
+
+DAEMON_OPTS="<%= @args %>"
+
+start() {
+    echo -n $"Starting ${NAME}: "
+    ulimit -n $NFILES
+#    daemon --pidfile $PID_FILE --user $SVC_USER $DAEMON $DAEMON_OPTS
+    daemonize -u $SVC_USER -p $PID_FILE -l $LOCK_FILE $DAEMON $DAEMON_OPTS
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $LOCK_FILE
+    return $RETVAL
 }
 
-start () {
-    LOG_DIR=<%= @log_dir %>
-    nohup su --login <%= @user || 'root' %> --command ${proc_bin} ${proc_args} > ${proc_log} &
+reload() {
+    echo -n $"Reloading ${NAME}: "
+    killproc -p ${PID_FILE} $DAEMON -1
+    RETVAL=$?
+    echo
+    return $RETVAL
 }
 
-stop () {
-    find_proc
-    if [ $PID -ne -1 ]; then
-        kill $PID
-    fi
+stop() {
+    echo -n $"Stopping ${NAME}: "
+    killproc -p ${PID_FILE} -d 10 $DAEMON
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f ${LOCK_FILE} ${PID_FILE}
+    return $RETVAL
 }
 
-case $1 in
-start)
+case "$1" in
+    start)
         start
         ;;
-stop)
+    stop)
         stop
-        exit 0
         ;;
-reload)
+    status)
+        status -p ${PID_FILE} $DAEMON
+        RETVAL=$?
+        ;;
+    reload|force-reload)
+        reload
+        ;;
+    restart)
         stop
         start
         ;;
-restart)
-        stop
-        start
+    *)
+        N=/etc/init.d/${NAME}
+        echo "Usage: $N {start|stop|status|restart|force-reload}" >&2
+        RETVAL=2
         ;;
-status)
-    find_proc
-    if [ $PID -gt 0 ]; then
-        echo "<%= @description %> running"
-            exit 0
-        else
-        echo "<%= @description %> not running"
-            exit 1
-    fi
-        ;;
-*)
-        echo $"Usage: $0 {start|stop|restart|reload|status}"
-        RETVAL=1
 esac
-exit 0
+
+exit $RETVAL

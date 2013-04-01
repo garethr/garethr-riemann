@@ -1,1 +1,2 @@
-class riemann::riak::config {}
+class riemann::riak::config {
+}
