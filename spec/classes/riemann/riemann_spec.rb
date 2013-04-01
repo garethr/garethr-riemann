@@ -57,6 +57,7 @@ describe 'riemann', :type => :class do
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat'} }
     it { should include_class('epel') }
+    it { should contain_package('daemonize')}
     it { should contain_file('/etc/init.d/riemann').with_mode('0755')}
     it { should_not contain_file('/etc/init/riemann.conf')}
     it { should contain_service('riemann').with_provider('redhat')}
