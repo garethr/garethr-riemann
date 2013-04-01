@@ -23,12 +23,12 @@ define riemann::utils::initvconf(
     default => $file,
   }
 
-  file { '/etc/init.d/$title':
+  file { "/etc/init.d/$title":
     ensure  => present,
     mode    => '0755',
     source  => $manage_config_source,
     content => $manage_config_content,
   }
 
-  File['/etc/init.d/$title'] ~> Service[$title] 
+  File["/etc/init.d/$title"] ~> Service[$title] 
 }

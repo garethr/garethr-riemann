@@ -42,26 +42,26 @@ define riemann::utils::upconf(
   }
 
   if $ensure == 'present' {
-    Service[$title] { require +> File['/etc/init/$title.conf'] }
+    Service[$title] { require +> File["/etc/init/$title.conf"] }
   }
 
-  file { '/etc/init.d/$title':
+  file { "/etc/init.d/$title":
     ensure => $manage_link_ensure,
     target => '/lib/init/upstart-job',
   }
 
-  file { '/etc/init/$title.conf':
+  file { "/etc/init/$title.conf":
     ensure  => $ensure,
     source  => $manage_config_source,
     content => $manage_config_content,
   }
 
   if $user != undef and $ensure == 'present' {
-    File['/etc/init/$title.conf'] { require +> User[$user] }
+    File["/etc/init/$title.conf"] { require +> User[$user] }
   }
 
   if $ensure == 'present' {
     # when the upstart file changes, restart the service
-    File['/etc/init/$title.conf'] ~> Service[$title]
+    File["/etc/init/$title.conf"] ~> Service[$title]
   }
 }

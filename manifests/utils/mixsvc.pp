@@ -1,3 +1,6 @@
+# User-per-service, multiple users in group,
+# group-per-puppetmodule.
+#
 # create a debian, rhel service with infra:
 # - user for svc
 # - group for svc
@@ -8,8 +11,8 @@
 define riemann::utils::mixsvc(
   $ensure               = 'running',
   $enable               = true,
-  $config_file          = '',
-  $config_file_template = '',
+  $config_file          = undef,
+  $config_file_template = undef,
   $user                 = '',
   $group                = '',
   $grep                 = undef,
@@ -37,24 +40,21 @@ define riemann::utils::mixsvc(
     default => $group,
   }
 
-  group { $group:
-    ensure  => present,
-    system  => true
-  }
+  Group <| title == $group |>
 
-  user { $user:
+  user { $manage_user:
     ensure  => present,
     system  => true,
-    gid     => $group,
+    gid     => $manage_group,
     home    => $home,
     shell   => '/bin/bash',
-    require => Group[$group], 
+    require => Group[$manage_group], 
   }
 
   case $::osfamily {
     'Debian': {
       riemann::utils::upconf { $title:
-        user        => $user,
+        user        => $manage_user,
         description => $description,
         exec        => $exec,
         file        => $config_file,
@@ -63,7 +63,7 @@ define riemann::utils::mixsvc(
     }
     'RedHat': {
       riemann::utils::initvconf { $title:
-        user        => $user,
+        user        => $manage_user,
         description => $description,
         exec        => $exec,
         log_dir     => $log_dir,
@@ -77,7 +77,7 @@ define riemann::utils::mixsvc(
     }
   }
 
-  if (!defined($log_dir)) {
+  if ! defined(File[$log_dir]) {
     file { $log_dir:
       ensure => 'directory',
       mode   => '0755',
@@ -91,7 +91,7 @@ define riemann::utils::mixsvc(
     hasrestart => true,
     provider   => $service_provider,
     require    => [
-      File['/etc/init.d/$title']
+      File["/etc/init.d/$title"]
     ],
   }
 }

@@ -1,11 +1,11 @@
-class riemann::config(
-  $riemann_server = 'localhost',
-  $riemann_port   = '5555'
-) {
-  file { '/etc/riemann.sample.config':
+class riemann::config {
+  $host = $riemann::host
+  $port = $riemann::port
+  $config = $riemann::config_file
+
+  file { '/etc/riemann.config':
     ensure => present,
-    source => 'puppet:///modules/riemann/riemann.config',
-    notify => Service['riemann'],
+    source => $config,
   }
 
   file { '/etc/puppet/riemann.yaml':

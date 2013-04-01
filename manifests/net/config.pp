@@ -1,0 +1,1 @@
+class riemann::net::config {}

@@ -1,13 +1,18 @@
 class riemann::service(
-  $config_file = '',
-  $bin_dir = $riemann::params::bin_dir,
-  $log_dir = $riemann::params::log_dir
+  $ensure = 'running',
+  $enable = true
 ) {
+  $log_dir = $riemann::log_dir
+  $bin_dir = $riemann::bin_dir
+  $user    = $riemann::user
+  $group   = $riemann::group
   riemann::utils::mixsvc { 'riemann':
-    log_dir              => $log_dir,
-    config_file          => $config_file,
-    config_file_template => $riemann::params::service_config_template,
-    exec                 => '/opt/riemann/bin/riemann',
-    description          => 'Riemann',
+    ensure      => $ensure,
+    enable      => $enable,
+    user        => $user,
+    group       => $group,
+    log_dir     => $log_dir,
+    exec        => "${bin_dir}/riemann",
+    description => 'Riemann Server',
   }
 }

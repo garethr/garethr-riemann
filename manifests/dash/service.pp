@@ -1,14 +1,15 @@
 # Installs the riemann-dash service.
 class riemann::dash::service(
-  $config_file = '',
-  $log_dir     = $riemann::dash::params::log_dir
+  $ensure = 'running',
+  $enable = true
 ) {
+  $log_dir = $riemann::dash::log_dir
   riemann::utils::mixsvc { 'riemann-dash':
     log_dir              => $log_dir,
-    config_file          => $config_file,
-    config_file_template => $riemann::dash::params::dash_config_template,
+    ensure               => $ensure,
+    enable               => $enable,
     exec                 => '/usr/bin/riemann-dash',
     description          => 'A service that launches the riemann dashboard',
-    grep                 => 'grep riemann-dash | grep ruby',
+    grep                 => 'grep riemann-dash | grep ruby'
   }
 }

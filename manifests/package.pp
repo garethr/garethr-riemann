@@ -1,10 +1,8 @@
-class riemann::package(
-  $version,
-  $riemann_dir = $riemann::params::dir
-) inherits riemann::params {
-  package { $riemann::params::packages:
-    ensure => installed,
-  }
+class riemann::package {
+  $version     = $riemann::version
+  $riemann_dir = $riemann::dir
+
+  ensure_packages($riemann::params::packages)
 
   class { 'wget': } ->
 
@@ -17,14 +15,14 @@ class riemann::package(
   exec { 'untar_riemann':
     command => "tar xvfj /usr/local/src/riemann-$version.tar.bz2",
     cwd     => '/opt',
-    creates => "/opt/riemann-$version",
+    creates => "${riemann_dir}-$version",
     path    => ['/bin'],
     before  => File[$riemann_dir],
   }
 
   file { $riemann_dir:
     ensure => link,
-    target => "/opt/riemann-$version",
+    target => "${riemann_dir}-$version",
     notify => Service['riemann'],
   }
 }
