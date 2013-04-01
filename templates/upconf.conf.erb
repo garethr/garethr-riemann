@@ -1,0 +1,19 @@
+# File managed by puppet.
+#
+# <%= @title %> - <%= @description %>
+
+description <%= @description %>
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+<% if @respawn -%>
+respawn
+respawn limit 10 5
+<% end -%>
+
+<% if @user -%>
+setuid <%= @user %>
+<% end -%>
+
+exec <%= @exec %>

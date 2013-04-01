@@ -1,11 +1,9 @@
-class riemann::dash::package {
-  include gcc
-
-  package { [
-      'riemann-dash'
-    ]:
-      ensure   => installed,
-      require  => Class['gcc'],
-      provider => gem,
+# Installs the dashboard ruby gem.
+class riemann::dash::package(
+  $ensure = 'installed'
+) inherits riemann::params {
+  package { 'riemann-dash':
+    ensure   => $ensure,
+    provider => gem,
   }
 }

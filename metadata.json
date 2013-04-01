@@ -1,0 +1,70 @@
+{
+  "name": "haf-riemann",
+  "author": "garethr, haf",
+  "description": "A fork of https://github.com/garethr/garethr-riemann that supports centos, debian,\nmore detailed configuration options and has users and a group defined for the services.\n\nExtra services supported:\n\n * riemann-riak\n\nServices supported:\n\n * riemann\n * riemann-net\n * riemann-health\n * riemann-dash\n\nUses templates to scaffold the services, so that it is easier to add further riemann integrations as they become available.\n\nThe epel module is only required if you are hosting on a RHEL flavored operating system.",
+  "license": "Apache License, Version 2.0",
+  "project_page": "https://github.com/haf/puppet-riemann",
+  "source": "",
+  "summary": "Module to manage the Riemann monitoring tool",
+  "version": "0.2.0",
+  "checksums": {
+    ".fixtures.yml": "07b814ae0326d6132a47950872c8fece",
+    ".travis.yml": "472d9a0d8b1fc3eddbab8e974c243c18",
+    "Gemfile": "7f252ebc330cb6aa7e28c854750360c8",
+    "Gemfile.lock": "c2cd23342abc2b1e207e7c5d32cb3c06",
+    "LICENSE": "47bbee59c4c1cb14cc3667035a227be0",
+    "Modulefile": "14ee9b40670baa6084423401c69ca3f8",
+    "README.md": "9b81ac1a7d903cec90e456dd879bca22",
+    "Rakefile": "c6a91ef43608c5d4b22bc7e50a94d6a5",
+    "lib\\puppet\\parser\\functions\\ensure_packages.rb": "fe6216751d26321d883a7ac390f079e1",
+    "manifests\\config.pp": "65f41ada95ee2a5248457b1d40a2be66",
+    "manifests\\dash.pp": "5e873f3130c089fc21418e5d7012f2d3",
+    "manifests\\dash\\config.pp": "56db8c40b67d2f3b567aa29bb84c30b6",
+    "manifests\\dash\\package.pp": "0f1acbf11f98704d8c4d7ba6cb7d09d1",
+    "manifests\\dash\\service.pp": "6e57362234ccdc3a4ad5733fcb76d0b4",
+    "manifests\\health.pp": "8d6b0aa8d9f38ad9270cf790902bf37b",
+    "manifests\\health\\config.pp": "151fa934124adaad9b6fb400b8832665",
+    "manifests\\health\\package.pp": "31a193900c4fd15052b8273ed99d873c",
+    "manifests\\health\\service.pp": "009bcef0253e45c8542b7ad169686057",
+    "manifests\\init.pp": "d841d7b9ea9462759e69c9e071417fa9",
+    "manifests\\net.pp": "269f84089b73a47fc4bab693fd2343d5",
+    "manifests\\net\\config.pp": "3542b26bb9afe43981d1131e64e45feb",
+    "manifests\\net\\package.pp": "6b1b6716a8f8449db59f573c4c766295",
+    "manifests\\net\\service.pp": "8d43438c3a6dc485ee585a8f12f375e1",
+    "manifests\\package.pp": "e5245455d91f09315429c79e5aeaa5fd",
+    "manifests\\params.pp": "8c9d1e49fca911a0b1991ae513892d26",
+    "manifests\\riak.pp": "df4ae15f43a2592988086208509dfadc",
+    "manifests\\riak\\config.pp": "0068f2c394c565ae8913f734f027f855",
+    "manifests\\riak\\package.pp": "c8ccf1c20fff2fffe124ef270c47bcde",
+    "manifests\\riak\\service.pp": "81a0171278d3e11bcfd5b6ddf1a68133",
+    "manifests\\service.pp": "2d62656ae53586209f4aeae7f6ddef08",
+    "manifests\\utils\\initvconf.pp": "5b5ebaf13eb481dafd9400510b2823a6",
+    "manifests\\utils\\mixsvc.pp": "8cf0d78d0fb4ddaaa5ff9fc9ae401235",
+    "manifests\\utils\\stduser.pp": "e035189b6d0feb84b83f59e181f59a46",
+    "manifests\\utils\\upconf.pp": "4904567544c6392d9c4d628c0cf62b6e",
+    "spec\\classes\\riemann\\config_spec.rb": "cfb3b8f63e9b3d01cefb6a678ceec5ca",
+    "spec\\classes\\riemann\\dash_spec.rb": "ab90c45b556b436c3e5886766af8549d",
+    "spec\\classes\\riemann\\package_spec.rb": "c4f8a9124a5d6ee7df81e9331a7d8e6b",
+    "spec\\classes\\riemann\\riemann_spec.rb": "4656039d620073b985b98c94dc9463df",
+    "spec\\classes\\riemann\\tools_spec.rb": "0394c714f3fd77566f28fdefe1359cda",
+    "spec\\spec_helper.rb": "7c799a87b06acc134c78766341d6dab7",
+    "templates\\initv.conf.erb": "4ac3440311f6b6246bfe8a100a7c1535",
+    "templates\\puppet\\riemann.yaml.erb": "d7a1070e3d2f006c6484d70316b780e9",
+    "templates\\riemann-dash.rb.erb": "efcffe5d36e334aa4539b28c652fc2ac",
+    "templates\\riemann.config.erb": "fe3dbb829c8de1fae2580fe112beae05",
+    "templates\\upconf.conf.erb": "9eb1799a6598c53ee03b08ed82ed5ff3"
+  },
+  "dependencies": [
+    {
+      "name": "maestrodev/wget"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "~3.2.0"
+    },
+    {
+      "name": "stahnma/epel",
+      "version_requirement": "\u003e\u003d0.0.3"
+    }
+  ]
+}

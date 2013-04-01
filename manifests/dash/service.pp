@@ -1,24 +1,19 @@
-class riemann::dash::service($dash_config_file='') {
-  file { '/etc/init.d/riemann-dash':
-    ensure => link,
-    target => '/lib/init/upstart-job',
-  }
+# Installs the riemann-dash service.
+class riemann::dash::service(
+  $ensure = 'running',
+  $enable = true
+) {
+  $log_dir     = $riemann::dash::log_dir
+  $group       = $riemann::group
+  $config_file = $riemann::dash::config_file
 
-  file { '/etc/init/riemann-dash.conf':
-    ensure  => present,
-    content => template('riemann/riemann-dash.conf.erb'),
-    notify  => Service['riemann-dash'],
-  }
-
-  service {'riemann-dash':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-    provider   => upstart,
-    require    => [
-      File['/etc/init/riemann-dash.conf'],
-      File['/etc/init.d/riemann-dash'],
-    ]
+  riemann::utils::mixsvc { 'riemann-dash':
+    log_dir     => $log_dir,
+    ensure      => $ensure,
+    enable      => $enable,
+    exec        => '/usr/bin/riemann-dash',
+    args        => $config_file,
+    description => 'A service that launches the riemann dashboard',
+    group       => $group,
   }
 }
