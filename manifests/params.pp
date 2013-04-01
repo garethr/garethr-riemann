@@ -28,7 +28,7 @@ class riemann::params {
   $riak_user = 'riemann-riak'
 
   $packages = $::osfamily ? {
-    /(?i:linux|redhat|amazon)/ => [
+    /(?i:linux|redhat)/ => [
       'daemonize'
     ],
     default                    => [
@@ -36,7 +36,7 @@ class riemann::params {
     ],
   }
   $tools_packages = $::osfamily ? {
-    /(?i:linux|redhat|amazon)/ => [ 
+    /(?i:linux|redhat)/ => [
       'make',
       'automake',
       'gcc',
@@ -53,7 +53,7 @@ class riemann::params {
     ],
   }
   case $::osfamily {
-    'RedHat', 'Linux': {
+    'RedHat': {
       require epel
     }
   }

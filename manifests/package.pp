@@ -9,12 +9,12 @@ class riemann::package inherits riemann::params {
 
   if $use_pkg {
     $package_provider = $::osfamily ? {
-      /(?i:linux|redhat|amazon)/ => 'rpm',
-      default                    => 'dpkg',
+      /(?i:linux|redhat)/ => 'rpm',
+      default             => 'dpkg',
     }
     $package_name = $::osfamily ? {
-      /(?i:linux|redhat|amazon)/ => "riemann-${version}-1.noarch.rpm",
-      default                    => "riemann_${version}_all.deb",
+      /(?i:linux|redhat)/ => "riemann-${version}-1.noarch.rpm",
+      default             => "riemann_${version}_all.deb",
     }
     $package = "http://aphyr.com/riemann/$package_name"
 

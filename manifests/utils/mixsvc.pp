@@ -22,7 +22,7 @@ define riemann::utils::mixsvc(
   $description
 ) {
   $service_provider = $::osfamily ? {
-    'Amazon' => 'redhat',
+    'Linux' => 'redhat',
     'RedHat' => 'redhat',
     'Debian' => 'upstart',
     default  => 'upstart'
@@ -45,7 +45,7 @@ define riemann::utils::mixsvc(
         respawn     => $respawn
       }
     }
-    'RedHat': {
+    'RedHat', 'Linux': {
       riemann::utils::initvconf { $title:
         user        => $manage_user,
         description => $description,
