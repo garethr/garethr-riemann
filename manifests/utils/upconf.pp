@@ -17,9 +17,9 @@ define riemann::utils::upconf(
   $ensure      = 'present',
   $file        = '',
   $template    = 'riemann/upconf.conf.erb',
-  $user        = undef,
-  $description = undef,
-  $respawn     = true,
+  $user,
+  $description,
+  $respawn,
   $exec
 ) {
   # content should be set to a default if no file

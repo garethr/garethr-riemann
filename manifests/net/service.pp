@@ -4,6 +4,7 @@ class riemann::net::service(
   $enable = true
 ) {
   $log_dir = $riemann::net::log_dir
+  $group   = $riemann::group
 
   riemann::utils::mixsvc { 'riemann-net':
     log_dir     => $log_dir,
@@ -12,5 +13,6 @@ class riemann::net::service(
     exec        => '/usr/bin/riemann-net',
     description => 'Riemann Net Process',
     grep        => 'grep riemann-net | grep ruby',
+    group       => $group,
   }
 }

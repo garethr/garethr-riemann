@@ -17,6 +17,7 @@ define riemann::utils::mixsvc(
   $group                = '',
   $grep                 = undef,
   $home                 = undef,
+  $respawn              = true,
   $log_dir,
   $exec,
   $description
@@ -40,15 +41,13 @@ define riemann::utils::mixsvc(
     default => $group,
   }
 
-  Group <| title == $group |>
-
   user { $manage_user:
     ensure  => present,
     system  => true,
     gid     => $manage_group,
     home    => $home,
     shell   => '/bin/bash',
-    require => Group[$manage_group], 
+    require => Group[$manage_group],
   }
 
   case $::osfamily {
@@ -59,6 +58,7 @@ define riemann::utils::mixsvc(
         exec        => $exec,
         file        => $config_file,
         template    => $config_file_template,
+        respawn     => $respawn
       }
     }
     'RedHat': {

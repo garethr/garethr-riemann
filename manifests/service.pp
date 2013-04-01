@@ -6,6 +6,7 @@ class riemann::service(
   $bin_dir = $riemann::bin_dir
   $user    = $riemann::user
   $group   = $riemann::group
+
   riemann::utils::mixsvc { 'riemann':
     ensure      => $ensure,
     enable      => $enable,

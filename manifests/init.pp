@@ -14,19 +14,35 @@ class riemann(
 ) inherits riemann::params {
   validate_string($version, $host, $port)
 
-  @group { $group:
-    ensure => present,
-    system => true,
+  anchor { 'riemann::start': }
+
+  group { $group:
+    ensure  => present,
+    system  => true,
+    require => Anchor['riemann::start'],
+    before  => Anchor['riemann::end'],
   }
+
+  ensure_packages($riemann::params::tools_packages)
 
   @package { 'riemann-tools':
     ensure   => 'installed',
     provider => gem,
-    require  => $riemann::params::tools_packages,
+    require  => Package[$riemann::params::tools_packages],
   }
 
-  class { 'riemann::package': } ->
-  class { 'riemann::config': } ~>
-  class { 'riemann::service': } ->
-  Class['riemann']
+  class { 'riemann::package':
+    require => Anchor['riemann::start'],
+    before  => Anchor['riemann::end'],
+  } ->
+  class { 'riemann::config':
+    require => Anchor['riemann::start'],
+    before  => Anchor['riemann::end'],
+  } ~>
+  class { 'riemann::service':
+    require => Anchor['riemann::start'],
+    before  => Anchor['riemann::end']
+  }
+
+  anchor { 'riemann::end': }
 }

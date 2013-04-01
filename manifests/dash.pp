@@ -11,9 +11,21 @@ class riemann::dash(
   $host        = $riemann::dash::params::host,
   $port        = $riemann::dash::params::port,
   $log_dir     = $riemann::dash::params::log_dir
-) {
-  class { 'riemann::dash::package': } ->
-  class { 'riemann::dash::config': } ~>
-  class { 'riemann::dash::service': } ->
-  Class['riemann::dash']
+) inherits riemann::dash::params {
+  anchor { 'riemann::dash::start': }
+
+  class { 'riemann::dash::package':
+    require => Anchor['riemann::dash::start'],
+    before  => Anchor['riemann::dash::end'],
+  } ->
+  class { 'riemann::dash::config':
+    require => Anchor['riemann::dash::start'],
+    before  => Anchor['riemann::dash::end'],
+  } ~>
+  class { 'riemann::dash::service':
+    require => Anchor['riemann::dash::start'],
+    before  => Anchor['riemann::dash::end'],
+  }
+
+  anchor { 'riemann::dash::end': }
 }

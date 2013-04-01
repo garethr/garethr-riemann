@@ -16,13 +16,12 @@ class riemann::package {
     command => "tar xvfj /usr/local/src/riemann-$version.tar.bz2",
     cwd     => '/opt',
     creates => "${riemann_dir}-$version",
-    path    => ['/bin'],
+    path    => ['/bin', '/usr/bin'],
     before  => File[$riemann_dir],
   }
 
   file { $riemann_dir:
     ensure => link,
     target => "${riemann_dir}-$version",
-    notify => Service['riemann'],
   }
 }

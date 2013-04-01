@@ -1,6 +1,6 @@
 class riemann::params {
   $version     = '0.2.0'
-  $config_file = 'puppet:///riemann/riemann.config'
+  $config_file = 'puppet:///modules/riemann/riemann.config'
 
   $port        = 5555
   $host        = '0.0.0.0'
