@@ -12,9 +12,18 @@ Status](https://gemnasium.com/garethr/garethr-riemann.png)](http://gemnasium.com
 
 The module includes three main components:
 
-    include riemann
+    class { 'riemann':
+		  before => [
+			  Class['riemann::dash'],
+				Class['riemann::health'],
+				Class['riemann::net'],
+				Class['riemann::riak]
+		  ]
+	  }
     include riemann::dash
-    include riemann::tools
+    include riemann::health
+    include riemann::net
+    include riemann::riak
 
 Riemann represents the Riemann daemon and associated configuration,
 riemann:dash the dashboard and riemann::tools the client and a couple of
