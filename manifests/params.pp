@@ -5,4 +5,18 @@ class riemann::params {
   $dash_host = 'localhost'
   $port = 5555
   $host = 'localhost'
+
+  case $::osfamily {
+    'Debian': {
+      $service_provider = upstart
+    }
+    'RedHat', 'Amazon': {
+      include epel
+      $service_provider = redhat
+    }
+    default: {
+      fail("${::operatingsystem} not supported")
+    }
+  }
+
 }

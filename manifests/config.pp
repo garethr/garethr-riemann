@@ -3,14 +3,25 @@ class riemann::config {
   $port = $riemann::port
   $config_file = $riemann::config_file
 
-  file { '/etc/init.d/riemann':
-    ensure => link,
-    target => '/lib/init/upstart-job',
-  }
+  case $::osfamily {
+    'Debian': {
+      file { '/etc/init.d/riemann':
+        ensure => link,
+        target => '/lib/init/upstart-job',
+      }
 
-  file { '/etc/init/riemann.conf':
-    ensure  => present,
-    content => template('riemann/etc/init/riemann.conf.erb')
+      file { '/etc/init/riemann.conf':
+        ensure  => present,
+        content => template('riemann/etc/init/riemann.conf.erb')
+      }
+    }
+    'RedHat', 'Amazon': {
+      file { '/etc/init.d/riemann':
+        ensure  => present,
+        mode    => '0755',
+        content => template('riemann/etc/init/riemann.conf.redhat.erb')
+      }
+    }
   }
 
   file { '/etc/riemann.sample.config':
@@ -22,4 +33,5 @@ class riemann::config {
     ensure  => present,
     content => template('riemann/etc/puppet/riemann.yaml.erb')
   }
+
 }
