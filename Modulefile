@@ -18,7 +18,11 @@ Services supported:
  * riemann
  * riemann-net
  * riemann-health
- * riemann-dash'
+ * riemann-dash
+
+Uses templates to scaffold the services, so that it is easier to add further riemann integrations as they become available.
+
+The epel module is only required if you are hosting on a RHEL flavored operating system.'
 dependency 'maestrodev/wget'
 dependency 'puppetlabs/stdlib', '~3.2.0'
 dependency 'stahnma/epel', '>=0.0.3'
