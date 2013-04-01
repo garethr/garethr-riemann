@@ -6,7 +6,7 @@
 # description: Riemann Health collection daemon
 # processname: riemann-health
 
-riemann_bin="/usr/local/bin/riemann-health"
+riemann_bin="/usr/bin/riemann-health"
 riemann_log="/var/log/riemann/riemann-health.log"
 
 find_riemann_process () {

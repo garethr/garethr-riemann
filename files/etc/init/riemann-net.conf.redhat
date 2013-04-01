@@ -6,7 +6,7 @@
 # description: Riemann Network collector
 # processname: riemann-net
 
-riemann_bin="/usr/local/bin/riemann-net"
+riemann_bin="/usr/bin/riemann-net"
 riemann_log="/var/log/riemann/riemann-net.log"
 
 find_riemann_process () {
