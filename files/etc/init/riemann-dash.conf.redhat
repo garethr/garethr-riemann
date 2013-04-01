@@ -1,70 +1,78 @@
-#! /bin/sh
-#
-# Start/Stop riemann dashboard
-#
-# chkconfig: 345 99 99
-# description: Riemann Dashboard
-# processname: riemann-dash
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:          riemann-dash
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:
+# Default-Stop:      0 1 6
+# Short-Description: Riemann dashboard
+# chkconfig: - 80 15
+# Description: Riemann dashboard
+### END INIT INFO
 
-riemann_bin="/usr/bin/riemann-dash"
-riemann_conf="/etc/riemann-dash.rb"
-riemann_log="/var/log/riemann/riemann-dash.log"
+# Source function library.
+. /etc/rc.d/init.d/functions
 
-find_riemann_process () {
-    PIDTEMP=`ps ux | grep riemann-dash | grep ruby | awk '{ print $2 }'`
-    # Pid not found
-    if [ "x$PIDTEMP" = "x" ]; then
-        PID=-1
-    else
-        PID=$PIDTEMP
-    fi
+SVC_USER=root
+
+DAEMON=/usr/bin/riemann-dash
+NAME=riemann-dash
+PID_FILE=${PIDFILE:-/var/run/${NAME}.pid}
+LOCK_FILE=${LOCKFILE:-/var/lock/subsys/${NAME}}
+NFILES=${NFILES:-32768}
+
+DAEMON_OPTS="/etc/riemann-dash.rb"
+
+start() {
+    echo -n $"Starting ${NAME}: "
+    ulimit -n $NFILES
+    daemonize -u $SVC_USER -p $PID_FILE -l $LOCK_FILE $DAEMON $DAEMON_OPTS
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $LOCK_FILE
+    return $RETVAL
 }
 
-start () {
-    LOG_DIR=`dirname ${riemann_log}`
-    if [ ! -d $LOG_DIR ]; then
-      echo "Log dir ${LOG_DIR} doesn't exist. Creating"
-      mkdir $LOG_DIR
-    fi
-    nohup ${riemann_bin} ${riemann_conf} >  ${riemann_log} &
+reload() {
+    echo -n $"Reloading ${NAME}: "
+    killproc -p ${PID_FILE} $DAEMON -1
+    RETVAL=$?
+    echo
+    return $RETVAL
 }
 
-stop () {
-    find_riemann_process
-    if [ $PID -ne -1 ]; then
-        kill $PID
-    fi
+stop() {
+    echo -n $"Stopping ${NAME}: "
+    killproc -p ${PID_FILE} -d 10 $DAEMON
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f ${LOCK_FILE} ${PID_FILE}
+    return $RETVAL
 }
 
-case $1 in
-start)
+case "$1" in
+    start)
         start
         ;;
-stop)
+    stop)
         stop
-        exit 0
         ;;
-reload)
+    status)
+        status -p ${PID_FILE} $DAEMON
+        RETVAL=$?
+        ;;
+    reload|force-reload)
+        reload
+        ;;
+    restart)
         stop
         start
         ;;
-restart)
-        stop
-        start
+    *)
+        N=/etc/init.d/${NAME}
+        echo "Usage: $N {start|stop|status|restart|force-reload}" >&2
+        RETVAL=2
         ;;
-status)
-        find_riemann_process
-    if [ $PID -gt 0 ]; then
-        echo "Riemann dashboard running"
-            exit 0
-        else
-        echo "Riemann dashboard not running"
-            exit 1
-    fi
-        ;;
-*)
-        echo $"Usage: $0 {start|stop|restart|reload|status}"
-        RETVAL=1
 esac
-exit 0
 
+exit $RETVAL

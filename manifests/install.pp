@@ -13,6 +13,7 @@ class riemann::install {
       class { 'java':
         distribution => 'java-1.7.0-openjdk',
       }
+      ensure_resource('package', 'daemonize', {'ensure' => 'present' })
     }
   }
 
