@@ -25,20 +25,21 @@ class riemann::tools::config {
       }
     }
     'RedHat', 'Amazon': {
+      $gem_path = $riemann::params::gem_path
       file { '/etc/init.d/riemann-net':
-        ensure => present,
-        source => 'puppet:///modules/riemann/etc/init/riemann-net.conf.redhat',
-        group  => root,
-        owner  => root,
-        mode   => '0755',
+        ensure  => present,
+        content => template('riemann/etc/init/riemann-net.conf.redhat.erb'),
+        group   => root,
+        owner   => root,
+        mode    => '0755',
       }
 
       file { '/etc/init.d/riemann-health':
-        ensure => present,
-        source => 'puppet:///modules/riemann/etc/init/riemann-health.conf.redhat',
-        group  => root,
-        owner  => root,
-        mode   => '0755',
+        ensure  => present,
+        content => template('riemann/etc/init/riemann-health.conf.redhat.erb'),
+        group   => root,
+        owner   => root,
+        mode    => '0755',
       }
     }
   }

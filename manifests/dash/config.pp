@@ -15,10 +15,11 @@ class riemann::dash::config {
       }
     }
     'RedHat', 'Amazon': {
+      $gem_path = $riemann::params::gem_path
       file { '/etc/init.d/riemann-dash':
         ensure  => present,
         mode    => '0755',
-        source  => 'puppet:///modules/riemann/etc/init/riemann-dash.conf.redhat',
+        content => template('riemann/etc/init/riemann-dash.conf.redhat.erb'),
       }
     }
   }

@@ -13,6 +13,10 @@ class riemann::params {
     'RedHat', 'Amazon': {
       include epel
       $service_provider = redhat
+      $gem_path = $::operatingsystemrelease ? {
+        '5.8'   => '/usr/local/bin/',
+        default => '/usr/bin/',
+      }
     }
     default: {
       fail("${::operatingsystem} not supported")

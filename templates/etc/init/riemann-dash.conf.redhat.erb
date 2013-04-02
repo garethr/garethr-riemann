@@ -1,13 +1,13 @@
 #! /bin/bash
 ### BEGIN INIT INFO
-# Provides:          riemann-health
+# Provides:          riemann-dash
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:
 # Default-Stop:      0 1 6
-# Short-Description: Riemann health stats collector
+# Short-Description: Riemann dashboard
 # chkconfig: - 80 15
-# Description: Riemann health stats collector
+# Description: Riemann dashboard
 ### END INIT INFO
 
 # Source function library.
@@ -15,13 +15,13 @@
 
 SVC_USER=root
 
-DAEMON=/usr/bin/riemann-health
-NAME=riemann-health
+DAEMON=<%= gem_path %>riemann-dash
+NAME=riemann-dash
 PID_FILE=${PIDFILE:-/var/run/${NAME}.pid}
 LOCK_FILE=${LOCKFILE:-/var/lock/subsys/${NAME}}
 NFILES=${NFILES:-32768}
 
-DAEMON_OPTS=""
+DAEMON_OPTS="/etc/riemann-dash.rb"
 
 start() {
     echo -n $"Starting ${NAME}: "

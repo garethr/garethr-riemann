@@ -1,13 +1,13 @@
 #! /bin/bash
 ### BEGIN INIT INFO
-# Provides:          riemann-net
+# Provides:          riemann-health
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:
 # Default-Stop:      0 1 6
-# Short-Description: Riemann network stats collector
+# Short-Description: Riemann health stats collector
 # chkconfig: - 80 15
-# Description: Riemann network stats collector
+# Description: Riemann health stats collector
 ### END INIT INFO
 
 # Source function library.
@@ -15,8 +15,8 @@
 
 SVC_USER=root
 
-DAEMON=/usr/bin/riemann-net
-NAME=riemann-net
+DAEMON=<%= gem_path %>riemann-health
+NAME=riemann-health
 PID_FILE=${PIDFILE:-/var/run/${NAME}.pid}
 LOCK_FILE=${LOCKFILE:-/var/lock/subsys/${NAME}}
 NFILES=${NFILES:-32768}

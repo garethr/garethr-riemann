@@ -38,12 +38,17 @@ describe 'riemann::tools', :type => :class do
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat'} }
     it { should include_class('epel') }
-    it { should contain_file('/etc/init.d/riemann-net').with_mode('0755')}
-    it { should contain_file('/etc/init.d/riemann-health').with_mode('0755')}
+    it { should contain_file('/etc/init.d/riemann-net').with_mode('0755').with_content(/\/usr\/bin\/riemann-net/)}
+    it { should contain_file('/etc/init.d/riemann-health').with_mode('0755').with_content(/\/usr\/bin\/riemann-health/)}
     it { should_not contain_file('/etc/init/riemann-net.conf')}
     it { should_not contain_file('/etc/init/riemann-health.conf')}
     it { should contain_service('riemann-net').with_provider('redhat')}
     it { should contain_service('riemann-health').with_provider('redhat')}
   end
 
+  context 'when running on Centos 5.8 with different gem bin path' do
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '5.8'} }
+    it { should contain_file('/etc/init.d/riemann-net').with_mode('0755').with_content(/\/usr\/local\/bin\/riemann-net/)}
+    it { should contain_file('/etc/init.d/riemann-health').with_mode('0755').with_content(/\/usr\/local\/bin\/riemann-health/)}
+  end
 end

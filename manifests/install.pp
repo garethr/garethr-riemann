@@ -1,5 +1,6 @@
 class riemann::install {
   include wget
+  include java
 
   case $::osfamily {
     'Debian': {
@@ -7,12 +8,8 @@ class riemann::install {
         command     => '/usr/bin/apt-get update',
         before      => Class['java'],
       }
-      include java
     }
     'RedHat', 'Amazon': {
-      class { 'java':
-        distribution => 'java-1.7.0-openjdk',
-      }
       ensure_resource('package', 'daemonize', {'ensure' => 'present' })
     }
   }

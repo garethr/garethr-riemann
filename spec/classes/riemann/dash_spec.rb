@@ -43,9 +43,14 @@ describe 'riemann::dash', :type => :class do
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat'} }
     it { should include_class('epel') }
-    it { should contain_file('/etc/init.d/riemann-dash').with_mode('0755')}
+    it { should contain_file('/etc/init.d/riemann-dash').with_mode('0755').with_content(/\/usr\/bin\/riemann-dash/)}
     it { should_not contain_file('/etc/init/riemann-dash.conf')}
     it { should contain_service('riemann-dash').with_provider('redhat')}
+  end
+
+  context 'when running on Centos 5.8 with different gem path' do
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '5.8'} }
+    it { should contain_file('/etc/init.d/riemann-dash').with_content(/\/usr\/local\/bin\/riemann-dash/)}
   end
 
 end
