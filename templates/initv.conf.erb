@@ -31,7 +31,7 @@ start() {
     echo -n $"Starting ${NAME}: "
     ulimit -n $NFILES
 #    daemon --pidfile $PID_FILE --user $SVC_USER $DAEMON $DAEMON_OPTS
-    daemonize -u $SVC_USER -p $PID_FILE -l $LOCK_FILE $DAEMON $DAEMON_OPTS
+    daemonize -u $SVC_USER -c '<%= @home %>' -p $PID_FILE -l $LOCK_FILE $DAEMON $DAEMON_OPTS
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $LOCK_FILE

@@ -14,11 +14,13 @@ class riemann::dash(
 ) inherits riemann::params {
   $config_file = $riemann::params::dash_config_file
   $user        = $riemann::params::dash_user
+  $home        = $riemann::params::dash_home
 
   anchor { 'riemann::dash::start': }
 
   riemann::utils::stduser { $user:
-    group => $group,
+    group   => $group,
+    home    => $home,
     require => Anchor['riemann::dash::start'],
     before  => Anchor['riemann::dash::end'],
   } ->

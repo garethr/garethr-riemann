@@ -30,7 +30,7 @@ define riemann::utils::stduser(
     ensure  => present,
     system  => true,
     gid     => $manage_group,
-    home    => $home,
+    home    => $manage_home,
     shell   => '/bin/bash',
   }
 }

@@ -6,6 +6,7 @@ class riemann::dash::service(
   $log_dir     = $riemann::dash::log_dir
   $group       = $riemann::group
   $config_file = $riemann::dash::config_file
+  $home        = $riemann::dash::home
 
   riemann::utils::mixsvc { 'riemann-dash':
     log_dir     => $log_dir,
@@ -15,5 +16,6 @@ class riemann::dash::service(
     args        => $config_file,
     description => 'A service that launches the riemann dashboard',
     group       => $group,
+    home        => $home,
   }
 }

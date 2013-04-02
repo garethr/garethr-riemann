@@ -6,6 +6,7 @@ define riemann::utils::initvconf(
   $description  = undef,
   $extra_script = undef,
   $args         = '',
+  $home         = '/',
   $exec
 ) {
   # content should be set to a default if no file

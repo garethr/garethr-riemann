@@ -53,6 +53,7 @@ define riemann::utils::mixsvc(
         args        => $args,
         file        => $config_file,
         template    => $config_file_template,
+        home        => $home,
       }
     }
     default: {

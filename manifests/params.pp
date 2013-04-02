@@ -19,7 +19,8 @@ class riemann::params {
   $dash_host   = '0.0.0.0'
   $dash_port   = 4567
   $dash_config_file = '/etc/riemann/riemann-dash.rb'
-  $dash_user   = 'riemann-user'
+  $dash_user   = 'riemann-dash'
+  $dash_home   = '/home/riemann-dash'
 
   $health_user = 'riemann-health'
 
