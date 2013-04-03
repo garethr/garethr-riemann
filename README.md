@@ -12,13 +12,15 @@ Status](https://gemnasium.com/garethr/garethr-riemann.png)](http://gemnasium.com
 
 The module includes three main components:
 
+    class { 'java': }
     class { 'riemann':
 		  before => [
 			  Class['riemann::dash'],
 				Class['riemann::health'],
 				Class['riemann::net'],
 				Class['riemann::riak]
-		  ]
+		  ],
+      require => Class['java'],
 	  }
     include riemann::dash
     include riemann::health
