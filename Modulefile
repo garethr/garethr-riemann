@@ -26,3 +26,4 @@ The epel module is only required if you are hosting on a RHEL flavored operating
 dependency 'maestrodev/wget'
 dependency 'puppetlabs/stdlib', '~3.2.0'
 dependency 'stahnma/epel', '>=0.0.3'
+dependency 'puppetlabs/java'
