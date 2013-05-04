@@ -1,5 +1,5 @@
 name          'garethr-riemann'
-version       '0.3.3'
+version       '0.4.0'
 author        'garethr'
 license       'Apache License, Version 2.0'
 summary       'Module to manage the Riemann monitoring tool'
