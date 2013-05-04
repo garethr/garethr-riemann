@@ -55,7 +55,7 @@ describe 'riemann', :type => :class do
   end
 
   context 'when running on RedHat/Centos' do
-    let(:facts) { {:osfamily => 'RedHat'} }
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Centos'} }
     it { should include_class('epel') }
     it { should contain_package('daemonize')}
     it { should contain_file('/etc/init.d/riemann').with_mode('0755')}

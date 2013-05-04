@@ -9,10 +9,14 @@ class riemann::params {
   case $::osfamily {
     'Debian': {
       $service_provider = upstart
+      $libxml_package = 'libxml2-dev'
+      $libxslt_package = 'libxslt-dev'
     }
     'RedHat', 'Amazon': {
       include epel
       $service_provider = redhat
+      $libxml_package = 'libxml2-devel'
+      $libxslt_package = 'libxslt-devel'
       $gem_path = $::operatingsystemrelease ? {
         '5.8'   => '/usr/local/bin/',
         default => '/usr/bin/',

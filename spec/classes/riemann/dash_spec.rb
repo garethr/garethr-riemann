@@ -8,6 +8,8 @@ describe 'riemann::dash', :type => :class do
   it { should create_class('riemann::dash::service')}
   it { should include_class('gcc')}
   it { should contain_package('riemann-dash')}
+  it { should contain_package('libxml2-dev')}
+  it { should contain_package('libxslt-dev')}
   it { should contain_service('riemann-dash').with_provider('upstart')}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/localhost/)}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/4567/)}
@@ -41,8 +43,10 @@ describe 'riemann::dash', :type => :class do
   end
 
   context 'when running on RedHat/Centos' do
-    let(:facts) { {:osfamily => 'RedHat'} }
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Centos'} }
     it { should include_class('epel') }
+    it { should contain_package('libxml2-devel')}
+    it { should contain_package('libxslt-devel')}
     it { should contain_file('/etc/init.d/riemann-dash').with_mode('0755').with_content(/\/usr\/bin\/riemann-dash/)}
     it { should_not contain_file('/etc/init/riemann-dash.conf')}
     it { should contain_service('riemann-dash').with_provider('redhat')}
