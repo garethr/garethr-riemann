@@ -5,6 +5,9 @@ describe 'riemann::tools', :type => :class do
 
   it { should contain_package('riemann-tools').with_provider('gem')}
   it { should contain_package('riemann-client').with_provider('gem')}
+  it { should contain_package('libxml2-dev')}
+  it { should contain_package('libxslt-dev')}
+  it { should include_class('gcc')}
 
   context 'with services enabled' do
     let(:params) { {'health_enabled' => false, 'net_enabled' => false} }
@@ -44,6 +47,8 @@ describe 'riemann::tools', :type => :class do
     it { should_not contain_file('/etc/init/riemann-health.conf')}
     it { should contain_service('riemann-net').with_provider('redhat')}
     it { should contain_service('riemann-health').with_provider('redhat')}
+    it { should contain_package('libxml2-devel')}
+    it { should contain_package('libxslt-devel')}
   end
 
   context 'when running on Centos 5.8 with different gem bin path' do
