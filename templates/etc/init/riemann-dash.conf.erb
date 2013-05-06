@@ -1,4 +1,10 @@
 description "start and stop riemann-dash"
 author "Gareth Rushgrove"
 
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 5 20
+
 exec riemann-dash /etc/riemann-dash.rb
