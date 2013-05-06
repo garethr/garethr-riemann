@@ -9,15 +9,29 @@ describe 'riemann::tools', :type => :class do
   it { should contain_package('libxslt-dev')}
   it { should include_class('gcc')}
 
-  context 'with services enabled' do
+  context 'with services disabled' do
     let(:params) { {'health_enabled' => false, 'net_enabled' => false} }
     it { should contain_service('riemann-net').with_provider('upstart').with_enable(false)}
     it { should contain_service('riemann-health').with_provider('upstart').with_enable(false)}
+    it { should_not contain_user('riemann-net')}
+    it { should_not contain_user('riemann-health')}
   end
 
-  context 'with services disabled' do
-    it { should contain_service('riemann-net').with_provider('upstart')}
-    it { should contain_service('riemann-health').with_provider('upstart')}
+  context 'with services enabled' do
+    it { should contain_service('riemann-net').with_provider('upstart').with_enable(true)}
+    it { should contain_service('riemann-health').with_provider('upstart').with_enable(true)}
+    it { should contain_user('riemann-net')}
+    it { should contain_user('riemann-health')}
+    it { should contain_file('/etc/init/riemann-health.conf').with_content(/setuid riemann-health/)}
+    it { should contain_file('/etc/init/riemann-net.conf').with_content(/setuid riemann-net/)}
+  end
+
+  context 'with custom users' do
+    let(:params) { { 'health_user' => 'bob', 'net_user' => 'jim'} }
+    it { should contain_user('bob')}
+    it { should contain_user('jim')}
+    it { should contain_file('/etc/init/riemann-health.conf').with_content(/setuid bob/)}
+    it { should contain_file('/etc/init/riemann-net.conf').with_content(/setuid jim/)}
   end
 
   context 'passing invalid params' do

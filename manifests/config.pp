@@ -2,6 +2,7 @@ class riemann::config {
   $host = $riemann::host
   $port = $riemann::port
   $config_file = $riemann::config_file
+  $user = $riemann::user
 
   case $::osfamily {
     'Debian': {
@@ -27,6 +28,7 @@ class riemann::config {
   file { '/etc/riemann.sample.config':
     ensure => present,
     source => 'puppet:///modules/riemann/etc/riemann.config',
+    owner  => $user,
   }
 
   file { '/etc/puppet/riemann.yaml':

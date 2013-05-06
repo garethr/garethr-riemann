@@ -21,15 +21,29 @@ class riemann::install {
   }
 
   file { '/opt/riemann':
-    ensure => link,
-    target => "/opt/riemann-${riemann::version}",
+    ensure  => link,
+    target  => "/opt/riemann-${riemann::version}",
+    owner   => $riemann::user,
+    require => User[$riemann::user],
+  }
+
+  user { $riemann::user:
+    ensure => present,
+  }
+
+  file { "/opt/riemann-${riemann::version}":
+    ensure  => directory,
+    owner   => $riemann::user,
+    require => User[$riemann::user],
   }
 
   exec { 'untar_riemann':
     command => "/bin/tar --bzip2 -xvf /usr/local/src/riemann-${riemann::version}.tar.bz2",
     cwd     => '/opt',
-    creates => "/opt/riemann-${riemann::version}",
+    creates => "/opt/riemann-${riemann::version}/bin/riemann",
     before  => File['/opt/riemann'],
+    user    => $riemann::user,
+    require => File["/opt/riemann-${riemann::version}"],
   }
 
 }

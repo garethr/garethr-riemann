@@ -4,6 +4,8 @@ author "Gareth Rushgrove"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
+setuid <%= user %>
+
 respawn
 respawn limit 5 20
 

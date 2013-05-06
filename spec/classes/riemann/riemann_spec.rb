@@ -14,10 +14,21 @@ describe 'riemann', :type => :class do
   it { should contain_service('riemann').with_provider('upstart')}
   it { should contain_wget__fetch('download_riemann')}
   it { should contain_exec('untar_riemann')}
+  it { should contain_user('riemann')}
+
+  it { should contain_file('/etc/init/riemann.conf').with_content(/setuid riemann/) }
+
+  context 'passing a custom user' do
+    let(:params) { {'user' => 'bob'} }
+    it { should contain_user('bob')}
+    it { should_not contain_user('riemann')}
+    it { should contain_file('/etc/init/riemann.conf').with_content(/setuid bob/) }
+  end
 
   context 'passing a version number' do
     let(:params) { {'version' => '1.0.0'} }
-    it { should contain_exec('untar_riemann').with_creates("/opt/riemann-1.0.0")}
+    it { should contain_exec('untar_riemann').with_creates("/opt/riemann-1.0.0/bin/riemann")}
+    it { should contain_file('/opt/riemann-1.0.0').with_owner('riemann')}
   end
 
   context 'passing a config file' do

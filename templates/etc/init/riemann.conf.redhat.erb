@@ -27,7 +27,7 @@ start () {
       echo "Log dir ${LOG_DIR} doesn't exist. Creating"
       mkdir $LOG_DIR
     fi
-    nohup nice ${NICE_LEVEL} ${riemann_bin} ${riemann_conf} >  ${riemann_log} &
+    nohup su --login <%= user %> nice ${NICE_LEVEL} ${riemann_bin} ${riemann_conf} >  ${riemann_log} &
 }
 
 stop () {

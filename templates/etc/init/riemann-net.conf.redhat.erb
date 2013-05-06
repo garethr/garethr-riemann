@@ -13,7 +13,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-SVC_USER=root
+SVC_USER=<%= net_user %>
 
 DAEMON=<%= gem_path %>riemann-net
 NAME=riemann-net

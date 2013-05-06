@@ -1,6 +1,8 @@
 class riemann::tools::config {
   $health_enabled = $riemann::tools::health_enabled
   $net_enabled = $riemann::tools::net_enabled
+  $net_user = $riemann::tools::net_user
+  $health_user = $riemann::tools::health_user
 
   case $::osfamily {
     'Debian': {
@@ -10,8 +12,8 @@ class riemann::tools::config {
       }
 
       file { '/etc/init/riemann-health.conf':
-        ensure => present,
-        source => 'puppet:///modules/riemann/etc/init/riemann-health.conf',
+        ensure  => present,
+        content => template('riemann/etc/init/riemann-health.conf.erb'),
       }
 
       file { '/etc/init.d/riemann-net':
@@ -21,7 +23,7 @@ class riemann::tools::config {
 
       file { '/etc/init/riemann-net.conf':
         ensure => present,
-        source => 'puppet:///modules/riemann/etc/init/riemann-net.conf',
+        content => template('riemann/etc/init/riemann-net.conf.erb'),
       }
     }
     'RedHat', 'Amazon': {

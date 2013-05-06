@@ -1,6 +1,7 @@
 class riemann::dash::config {
   $host = $riemann::dash::host
   $port = $riemann::dash::port
+  $user = $riemann::dash::user
 
   case $::osfamily {
     'Debian': {

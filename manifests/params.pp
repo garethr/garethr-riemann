@@ -1,10 +1,14 @@
 class riemann::params {
-  $version = '0.2.0'
+  $version = '0.2.1'
   $config_file = '/etc/riemann.sample.config'
   $dash_port = 4567
   $dash_host = 'localhost'
+  $dash_user = 'riemann-dash'
+  $net_user = 'riemann-net'
+  $health_user = 'riemann-health'
   $port = 5555
   $host = 'localhost'
+  $user = 'riemann'
 
   case $::osfamily {
     'Debian': {

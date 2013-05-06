@@ -13,6 +13,15 @@ describe 'riemann::dash', :type => :class do
   it { should contain_service('riemann-dash').with_provider('upstart')}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/localhost/)}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/4567/)}
+  it { should contain_user('riemann-dash')}
+
+  it { should contain_file('/etc/init/riemann-dash.conf').with_content(/setuid riemann-dash/)}
+
+  context 'passing a custom user' do
+    let(:params) { {'user' => 'bob'} }
+    it { should_not contain_file('/etc/init/riemann-dash.conf').with_content(/setuid riemann-dash/)}
+    it { should contain_file('/etc/init/riemann-dash.conf').with_content(/setuid bob/)}
+  end
 
   context 'passing a custom port' do
     let(:params) { {'port' => 6000} }
