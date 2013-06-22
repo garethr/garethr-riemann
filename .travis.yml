@@ -1,5 +1,6 @@
 ---
 language: ruby
+before_install: rm Gemfile.lock
 rvm:
 - 1.9.2
 - 1.9.3
