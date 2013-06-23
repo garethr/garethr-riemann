@@ -4,9 +4,9 @@ author "Gareth Rushgrove"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
-setuid <%= user %>
+setuid <%= @user %>
 
 respawn
 respawn limit 5 20
 
-exec /opt/riemann/bin/riemann <%= config_file %>
+exec /opt/riemann/bin/riemann <%= @config_file %>

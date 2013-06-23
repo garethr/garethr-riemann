@@ -10,6 +10,7 @@ gem "rake"
 gem "puppet", puppetversion
 gem "puppet-lint"
 gem "rspec-puppet"
+gem "rspec-system-puppet"
 gem "puppetlabs_spec_helper"
 gem "travis"
 gem "travis-lint"
