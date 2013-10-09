@@ -3,7 +3,6 @@ GEM
   specs:
     addressable (2.3.4)
     backports (2.8.2)
-    builder (3.2.2)
     coderay (1.0.9)
     diff-lcs (1.2.4)
     facter (1.7.0)
@@ -20,7 +19,6 @@ GEM
       net-http-pipeline
     hashr (0.0.22)
     highline (1.6.18)
-    kwalify (0.7.2)
     launchy (2.3.0)
       addressable (~> 2.3)
     metaclass (0.0.1)
@@ -31,11 +29,7 @@ GEM
     multipart-post (1.2.0)
     net-http-persistent (2.8)
     net-http-pipeline (1.0.1)
-    net-scp (1.1.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.6.7)
     netrc (0.7.7)
-    nokogiri (1.5.10)
     pry (0.9.12.1)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -43,19 +37,12 @@ GEM
     puppet (2.7.21)
       facter (~> 1.5)
     puppet-lint (0.3.2)
-    puppet-syntax (0.0.3)
-      puppet (>= 2.7.0)
-      rake
     puppetlabs_spec_helper (0.4.1)
       mocha (>= 0.10.5)
       rake
       rspec (>= 2.9.0)
       rspec-puppet (>= 0.1.1)
     rake (10.0.4)
-    rbvmomi (1.6.0)
-      builder
-      nokogiri (>= 1.4.1)
-      trollop
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -66,18 +53,7 @@ GEM
     rspec-mocks (2.13.1)
     rspec-puppet (0.1.6)
       rspec
-    rspec-system (2.1.0)
-      kwalify (~> 0.7.2)
-      net-scp (~> 1.1)
-      net-ssh (~> 2.6)
-      nokogiri (~> 1.5.9)
-      rbvmomi (~> 1.6)
-      rspec (~> 2.13)
-      systemu (~> 2.5)
-    rspec-system-puppet (2.0.0)
-      rspec-system (~> 2.0)
     slop (3.4.4)
-    systemu (2.5.2)
     travis (1.2.0)
       backports (~> 2.6)
       faraday (~> 0.8)
@@ -90,18 +66,15 @@ GEM
       pry (~> 0.9)
     travis-lint (1.7.0)
       hashr (~> 0.0.22)
-    trollop (2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  puppet (~> 2.7)
+  puppet (~> 2.7.0)
   puppet-lint
-  puppet-syntax
   puppetlabs_spec_helper
   rake
   rspec-puppet
-  rspec-system-puppet
   travis
   travis-lint
