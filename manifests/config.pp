@@ -23,6 +23,7 @@ class riemann::config {
         content => template('riemann/etc/init/riemann.conf.redhat.erb')
       }
     }
+    default: {}
   }
 
   file { '/etc/riemann.sample.config':

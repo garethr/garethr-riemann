@@ -22,7 +22,7 @@ class riemann::tools::config {
       }
 
       file { '/etc/init/riemann-net.conf':
-        ensure => present,
+        ensure  => present,
         content => template('riemann/etc/init/riemann-net.conf.erb'),
       }
     }
@@ -44,6 +44,7 @@ class riemann::tools::config {
         mode    => '0755',
       }
     }
+    default: {}
   }
 
 }

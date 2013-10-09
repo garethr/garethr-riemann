@@ -12,6 +12,7 @@ class riemann::install {
     'RedHat', 'Amazon': {
       ensure_resource('package', 'daemonize', {'ensure' => 'present' })
     }
+    default: {}
   }
 
   wget::fetch { 'download_riemann':

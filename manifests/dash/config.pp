@@ -23,6 +23,7 @@ class riemann::dash::config {
         content => template('riemann/etc/init/riemann-dash.conf.redhat.erb'),
       }
     }
+    default: {}
   }
 
   file { '/etc/riemann-dash.rb':

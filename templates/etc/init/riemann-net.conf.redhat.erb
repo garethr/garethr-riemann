@@ -13,9 +13,9 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-SVC_USER=<%= net_user %>
+SVC_USER=<%= @net_user %>
 
-DAEMON=<%= gem_path %>riemann-net
+DAEMON=<%= @gem_path %>riemann-net
 NAME=riemann-net
 PID_FILE=${PIDFILE:-/var/run/${NAME}.pid}
 LOCK_FILE=${LOCKFILE:-/var/lock/subsys/${NAME}}

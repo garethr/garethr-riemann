@@ -7,7 +7,7 @@
 # processname: riemann
 
 riemann_bin="/opt/riemann/bin/riemann"
-riemann_conf="<%= config_file %>"
+riemann_conf="<%= @config_file %>"
 riemann_log="/var/log/riemann/riemann.log"
 NICE_LEVEL="-n 19"
 
@@ -27,7 +27,7 @@ start () {
       echo "Log dir ${LOG_DIR} doesn't exist. Creating"
       mkdir $LOG_DIR
     fi
-    nohup su --login <%= user %> nice ${NICE_LEVEL} ${riemann_bin} ${riemann_conf} >  ${riemann_log} &
+    nohup su --login <%= @user %> nice ${NICE_LEVEL} ${riemann_bin} ${riemann_conf} >  ${riemann_log} &
 }
 
 stop () {
