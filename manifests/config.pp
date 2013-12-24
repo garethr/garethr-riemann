@@ -37,4 +37,8 @@ class riemann::config {
     content => template('riemann/etc/puppet/riemann.yaml.erb')
   }
 
+  file { '/var/log/riemann.log':
+    owner => $user,
+  }
+
 }
