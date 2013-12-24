@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'riemann', :type => :class do
   let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
 
-  it { should include_class('riemann::install') }
-  it { should include_class('riemann::config') }
-  it { should include_class('riemann::service') }
+  it { should contain_class('riemann::install') }
+  it { should contain_class('riemann::config') }
+  it { should contain_class('riemann::service') }
   it { should contain_class('wget')}
   it { should contain_class('java')}
-  it { should_not include_class('epel') }
+  it { should_not contain_class('epel') }
   it { should contain_file('/etc/riemann.sample.config') }
   it { should contain_file('/etc/puppet/riemann.yaml') }
   it { should contain_service('riemann').with_provider('upstart')}
@@ -69,7 +69,7 @@ describe 'riemann', :type => :class do
 
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Centos'} }
-    it { should include_class('epel') }
+    it { should contain_class('epel') }
     it { should contain_package('daemonize')}
     it { should contain_file('/etc/init.d/riemann').with_mode('0755')}
     it { should_not contain_file('/etc/init/riemann.conf')}

@@ -3,11 +3,13 @@ require 'spec_helper'
 describe 'riemann::tools', :type => :class do
   let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
 
+  it { should compile.with_all_deps }
+
   it { should contain_package('riemann-tools').with_provider('gem')}
   it { should contain_package('riemann-client').with_provider('gem')}
   it { should contain_package('libxml2-dev')}
   it { should contain_package('libxslt-dev')}
-  it { should include_class('gcc')}
+  it { should contain_class('gcc')}
 
   context 'with services disabled' do
     let(:params) { {'health_enabled' => false, 'net_enabled' => false} }
@@ -54,7 +56,7 @@ describe 'riemann::tools', :type => :class do
 
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Centos'} }
-    it { should include_class('epel') }
+    it { should contain_class('epel') }
     it { should contain_file('/etc/init.d/riemann-net').with_mode('0755').with_content(/\/usr\/bin\/riemann-net/)}
     it { should contain_file('/etc/init.d/riemann-health').with_mode('0755').with_content(/\/usr\/bin\/riemann-health/)}
     it { should_not contain_file('/etc/init/riemann-net.conf')}

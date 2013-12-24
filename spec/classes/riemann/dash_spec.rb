@@ -3,10 +3,12 @@ require 'spec_helper'
 describe 'riemann::dash', :type => :class do
   let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
 
+  it { should compile.with_all_deps }
+
   it { should create_class('riemann::dash::install')}
   it { should create_class('riemann::dash::config')}
   it { should create_class('riemann::dash::service')}
-  it { should include_class('gcc')}
+  it { should contain_class('gcc')}
   it { should contain_package('riemann-dash')}
   it { should contain_package('libxml2-dev')}
   it { should contain_package('libxslt-dev')}
@@ -53,7 +55,7 @@ describe 'riemann::dash', :type => :class do
 
   context 'when running on RedHat/Centos' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Centos'} }
-    it { should include_class('epel') }
+    it { should contain_class('epel') }
     it { should contain_package('libxml2-devel')}
     it { should contain_package('libxslt-devel')}
     it { should contain_file('/etc/init.d/riemann-dash').with_mode('0755').with_content(/\/usr\/bin\/riemann-dash/)}
