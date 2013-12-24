@@ -17,12 +17,14 @@ describe 'riemann', :type => :class do
   it { should contain_user('riemann')}
 
   it { should contain_file('/etc/init/riemann.conf').with_content(/setuid riemann/) }
+  it { should contain_file('/var/log/riemann.log').with_owner('riemann') }
 
   context 'passing a custom user' do
     let(:params) { {'user' => 'bob'} }
     it { should contain_user('bob')}
     it { should_not contain_user('riemann')}
     it { should contain_file('/etc/init/riemann.conf').with_content(/setuid bob/) }
+    it { should contain_file('/var/log/riemann.log').with_owner('bob') }
   end
 
   context 'passing a version number' do
