@@ -23,6 +23,8 @@ GEM
       addressable (~> 2.3)
     metaclass (0.0.1)
     method_source (0.8.1)
+    mime-types (2.0)
+    mini_portile (0.5.2)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
@@ -30,12 +32,18 @@ GEM
     net-http-persistent (2.8)
     net-http-pipeline (1.0.1)
     netrc (0.7.7)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     pry (0.9.12.1)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
     puppet (2.7.23)
       facter (~> 1.5)
+    puppet-blacksmith (2.0.2)
+      nokogiri
+      puppet (>= 2.7.16)
+      rest-client
     puppet-lint (0.3.2)
     puppet-syntax (1.1.0)
       puppet (>= 2.7.0)
@@ -46,6 +54,8 @@ GEM
       rspec (>= 2.9.0)
       rspec-puppet (>= 0.1.1)
     rake (10.1.1)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -75,6 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   puppet (~> 2.7.0)
+  puppet-blacksmith
   puppet-lint
   puppet-syntax
   puppetlabs_spec_helper
