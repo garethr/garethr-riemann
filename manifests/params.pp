@@ -9,6 +9,7 @@ class riemann::params {
   $port = 5555
   $host = 'localhost'
   $user = 'riemann'
+  $rvm_ruby_string = undef
 
   case $::osfamily {
     'Debian': {
