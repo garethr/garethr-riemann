@@ -21,11 +21,15 @@
 #   The system user which riemann-net runs as. Defaults to riemann-net.
 #   Will be created by the module.
 #
+# [*rvm_ruby_string*]
+#   The RVM Ruby version which should be used. Defaults to undef.
+#
 class riemann::tools(
   $health_enabled = true,
   $health_user = $riemann::params::health_user,
   $net_enabled = true,
   $net_user = $riemann::params::net_user,
+  $rvm_ruby_string = $riemann::params::rvm_ruby_string,
 ) inherits riemann::params {
   validate_bool($health_enabled, $net_enabled)
   class { 'riemann::tools::install': } ->
