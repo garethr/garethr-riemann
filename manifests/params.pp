@@ -1,5 +1,5 @@
 class riemann::params {
-  $version = '0.2.1'
+  $version = '0.2.4'
   $config_file = '/etc/riemann.sample.config'
   $dash_port = 4567
   $dash_host = 'localhost'
