@@ -9,4 +9,4 @@ setuid <%= @health_user %>
 respawn
 respawn limit 5 20
 
-exec riemann-health
+exec <%= @rvm_ruby_string ? "/usr/local/rvm/wrappers/#{@rvm_ruby_string}/riemann-health" : "riemann-health" %>

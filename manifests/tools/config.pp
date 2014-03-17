@@ -3,6 +3,7 @@ class riemann::tools::config {
   $net_enabled = $riemann::tools::net_enabled
   $net_user = $riemann::tools::net_user
   $health_user = $riemann::tools::health_user
+  $rvm_ruby_string = $riemann::tools::rvm_ruby_string
 
   case $::osfamily {
     'Debian': {

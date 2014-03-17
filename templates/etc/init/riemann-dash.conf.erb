@@ -9,4 +9,4 @@ setuid <%= @user %>
 respawn
 respawn limit 5 20
 
-exec riemann-dash /etc/riemann-dash.rb
+exec <%= @rvm_ruby_string ? "/usr/local/rvm/wrappers/#{@rvm_ruby_string}/riemann-dash" : "riemann-dash" %> /etc/riemann-dash.rb

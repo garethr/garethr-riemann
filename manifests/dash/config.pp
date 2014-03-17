@@ -2,6 +2,7 @@ class riemann::dash::config {
   $host = $riemann::dash::host
   $port = $riemann::dash::port
   $user = $riemann::dash::user
+  $rvm_ruby_string = $riemann::dash::rvm_ruby_string
 
   case $::osfamily {
     'Debian': {
