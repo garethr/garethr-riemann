@@ -11,7 +11,7 @@ describe 'riemann::dash', :type => :class do
   it { should contain_class('gcc')}
   it { should contain_package('riemann-dash')}
   it { should contain_package('libxml2-dev')}
-  it { should contain_package('libxslt-dev')}
+  it { should contain_package('libxslt1-dev')}
   it { should contain_service('riemann-dash').with_provider('upstart')}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/localhost/)}
   it { should contain_file('/etc/riemann-dash.rb').with_content(/4567/)}

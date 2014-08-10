@@ -15,7 +15,7 @@ class riemann::params {
     'Debian': {
       $service_provider = upstart
       $libxml_package = 'libxml2-dev'
-      $libxslt_package = 'libxslt-dev'
+      $libxslt_package = 'libxslt1-dev'
     }
     'RedHat', 'Amazon': {
       include epel
