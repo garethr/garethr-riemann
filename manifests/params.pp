@@ -4,6 +4,8 @@ class riemann::params {
   $dash_port = 4567
   $dash_host = 'localhost'
   $dash_user = 'riemann-dash'
+  $dash_s3_config = {}
+  $dash_ws_config = '/var/lib/riemann-dash/layout.json'
   $net_user = 'riemann-net'
   $health_user = 'riemann-health'
   $port = 5555
