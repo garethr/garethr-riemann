@@ -13,4 +13,20 @@ class riemann::dash::install {
     require  => Class['gcc'],
     provider => gem,
   }
+
+  if ($riemann::dash::use_s3) {
+    case $::osfamily {
+      'debian': {
+        package {'ruby-dev':
+          ensure => "present"
+        }
+      }
+    }
+    ->
+    package {'fog':
+      ensure   => "present",
+      provider => "gem",
+      require  => Package['ruby-dev'];
+    }
+  }
 }
