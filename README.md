@@ -3,10 +3,13 @@ the event agregation and monitoring tool.
 
 This module is also available on the [Puppet Forge](https://forge.puppetlabs.com/garethr/riemann)
 
+[![Puppet
+Forge](http://img.shields.io/puppetforge/v/garethr/riemann.svg)](https://forge.puppetlabs.com/garethr/riemann)
 [![Build
 Status](https://secure.travis-ci.org/garethr/garethr-riemann.png)](http://travis-ci.org/garethr/garethr-riemann)
 [![Dependency
 Status](https://gemnasium.com/garethr/garethr-riemann.png)](http://gemnasium.com/garethr/garethr-riemann)
+
 
 ## Usage
 
