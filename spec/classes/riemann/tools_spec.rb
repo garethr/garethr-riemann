@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'riemann::tools', :type => :class do
-  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise'} }
+  let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'precise', :lsbmajdistrelease => 12.04} }
 
   it { should compile.with_all_deps }
 
