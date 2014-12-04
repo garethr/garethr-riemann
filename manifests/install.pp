@@ -5,8 +5,8 @@ class riemann::install {
   case $::osfamily {
     'Debian': {
       exec { 'riemann-apt-get-update':
-        command     => '/usr/bin/apt-get update',
-        before      => Class['java'],
+        command => '/usr/bin/apt-get update',
+        before  => Class['java'],
       }
     }
     'RedHat', 'Amazon': {
