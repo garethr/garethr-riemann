@@ -1,0 +1,35 @@
+{
+  "name": "garethr-riemann",
+  "version": "0.6.0",
+  "author": "Gareth Rushgrove",
+  "summary": "Module for installing and managing the Riemann monitoring tool",
+  "license": "Apache License, Version 2.0",
+  "source": "git://github.com/garethr/garethr-riemann",
+  "project_page": "https://github.com/garethr/garethr-riemann",
+  "issues_url": "https://github.com/garethr/garethr-riemann/issues",
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.1.0"
+    },{
+      "name": "maestrodev/wget"
+    },{
+      "name": "stahnma/epel",
+      "version_requirement": ">= 0.0.6"
+    },{
+      "name": "puppetlabs/java"
+    },{
+      "name": "puppetlabs/gcc"
+    }
+  ]
+}
