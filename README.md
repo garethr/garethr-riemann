@@ -43,3 +43,14 @@ via another puppet resource or otherwise.
 For a fully working example of this module you may also be interested in
 the [riemann-vagrant
 project](https://github.com/garethr/riemann-vagrant).
+
+## Testing
+
+For manual integration testing during development, there is a Vagrant box
+which can be used as follows (only installs the +riemann+ module by default):
+
+```
+bundle install
+bundle exec librarian-puppet install
+vagrant up
+```
