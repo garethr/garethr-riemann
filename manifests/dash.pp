@@ -22,7 +22,9 @@ class riemann::dash(
   $host = $riemann::params::dash_host,
   $port = $riemann::params::dash_port,
   $user = $riemann::params::dash_user,
-  $rvm_ruby_string = $riemann::params::rvm_ruby_string,
+  $s3_config = $riemann::params::dash_s3_config,
+  $ws_config = $riemann::params::dash_ws_config,
+  $rvm_ruby_string = $riemann::params::rvm_ruby_string
 ) inherits riemann::params {
   validate_string($host)
   validate_string($user)
@@ -31,4 +33,3 @@ class riemann::dash(
   class { 'riemann::dash::service': } ->
   Class['riemann::dash']
 }
-

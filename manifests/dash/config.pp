@@ -2,6 +2,8 @@ class riemann::dash::config {
   $host = $riemann::dash::host
   $port = $riemann::dash::port
   $user = $riemann::dash::user
+  $s3_config = $riemann::dash::s3_config
+  $ws_config = $riemann::dash::ws_config
   $rvm_ruby_string = $riemann::dash::rvm_ruby_string
 
   case $::osfamily {
