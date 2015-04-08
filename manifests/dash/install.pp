@@ -17,10 +17,13 @@ class riemann::dash::install {
   if ($riemann::dash::use_s3) {
     case $::osfamily {
       'debian': {
-        ensure_resource('package', 'ruby-dev', {'ensure' => 'present'})
+        ensure_resource('package', 'ruby-dev', {'ensure' => 'present' })
       }
     }
-    ->
-    ensure_resource('package', 'fog', {'ensure' => 'present', 'provider' => 'gem'})
+    ensure_resource('package', 'fog', {
+      'ensure' => 'present',
+      'provider' => 'gem',
+      'require' => Package['ruby-dev']
+    })
   }
 }
