@@ -24,8 +24,7 @@ class riemann::dash(
   $user = $riemann::params::dash_user,
   $s3_config = $riemann::params::dash_s3_config,
   $ws_config = $riemann::params::dash_ws_config,
-  $rvm_ruby_string = $riemann::params::rvm_ruby_string,
-  $use_s3 = ($s3_config != {})
+  $rvm_ruby_string = $riemann::params::rvm_ruby_string
 ) inherits riemann::params {
   validate_string($host)
   validate_string($user)
