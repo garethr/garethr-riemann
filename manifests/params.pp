@@ -9,6 +9,8 @@ class riemann::params {
   $port = 5555
   $host = 'localhost'
   $user = 'riemann'
+  $source = 'http://aphyr.com/'
+  $source_path = 'riemann/'
   $rvm_ruby_string = undef
 
   case $::osfamily {
