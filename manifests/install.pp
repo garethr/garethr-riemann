@@ -16,7 +16,7 @@ class riemann::install {
   }
 
   wget::fetch { 'download_riemann':
-    source      => "http://aphyr.com/riemann/riemann-${riemann::version}.tar.bz2",
+    source      => "${riemann::source}/${riemann::source_path}/riemann-${riemann::version}.tar.bz2",
     destination => "/usr/local/src/riemann-${riemann::version}.tar.bz2",
     before      => Exec['untar_riemann'],
   }
