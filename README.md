@@ -38,6 +38,12 @@ configuration file.
 In this last case you're responsible for making sure that file exists,
 via another puppet resource or otherwise.
 
+By default, this module will attempt to download the .bz2 archive from
+aphyr.com, run by the author of Riemann. An alternative source can be
+provided: 
+
+	class { 'riemann': source => 'http://myserver.corp', path=> '/riemann/' } 
+
 ## Example
 
 For a fully working example of this module you may also be interested in
