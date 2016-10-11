@@ -30,6 +30,7 @@ class riemann::install {
 
   user { $riemann::user:
     ensure => present,
+    system => true,
   }
 
   file { "/opt/riemann-${riemann::version}":
