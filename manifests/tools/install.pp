@@ -7,12 +7,14 @@ class riemann::tools::install {
   if $riemann::tools::health_enabled == true {
     user { $riemann::tools::health_user:
       ensure => present,
+      system => true,
     }
   }
 
   if $riemann::tools::net_enabled == true {
     user { $riemann::tools::net_user:
       ensure => present,
+      system => true,
     }
   }
 
