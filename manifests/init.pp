@@ -29,7 +29,7 @@ class riemann(
 ) inherits riemann::params {
 
   validate_absolute_path($config_file)
-  validate_string($version, $host, $port)
+  validate_string($version, $host)
 
   class { 'riemann::install': } ->
   class { 'riemann::config': } ~>
