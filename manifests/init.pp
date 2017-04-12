@@ -4,7 +4,7 @@
 #
 # === Parameters
 # [*version*]
-#   The version of riemann to instal
+#   The version of riemann to install
 #
 # [*config_file*]
 #   File path for a riemann config file. A default file is provided. If
